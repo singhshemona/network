@@ -4,7 +4,7 @@ export const initialNodes = [
   {
     id: '1',
     type: 'input',
-    // todo: make this work !!! plz lord
+    // see here to implement: https://reactflow.dev/docs/guides/custom-nodes/
     data: { label: <input type="text" defaultValue="no way this will work" /> },
     position: { x: 250, y: 5 },
     className: 'light',
