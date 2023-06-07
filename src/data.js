@@ -1,39 +1,80 @@
-export const data = {
-  "nodes": [
-    {
-      "id": "Node 1",
-      "height": 1,
-      "size": 24,
-      "color": "rgb(97, 205, 187)"
-    },
-    {
-      "id": "Node 2",
-      "height": 1,
-      "size": 24,
-      "color": "rgb(97, 205, 187)"
-    },
-    {
-      "id": "Node 3",
-      "height": 1,
-      "size": 24,
-      "color": "rgb(97, 205, 187)"
-    },
-  ],
-  "links": [
-    {
-      "source": "Node 1",
-      "target": "Node 2",
-      "distance": 80
-    },
-    {
-      "source": "Node 1",
-      "target": "Node 3",
-      "distance": 50
-    },
-    {
-      "source": "Node 3",
-      "target": "Node 1",
-      "distance": 60
-    },
-  ]
-}
+import { MarkerType } from 'reactflow';
+
+export const initialNodes = [
+  {
+    id: '1',
+    type: 'input',
+    // todo: make this work !!! plz lord
+    data: { label: <input type="text" defaultValue="no way this will work" /> },
+    position: { x: 250, y: 5 },
+    className: 'light',
+  },
+  {
+    id: '2',
+    data: { label: 'Group A' },
+    position: { x: 100, y: 100 },
+    className: 'light',
+    style: { backgroundColor: 'rgba(255, 0, 0, 0.2)', width: 200, height: 200 },
+  },
+  {
+    id: '2a',
+    data: { label: 'Node A.1' },
+    position: { x: 10, y: 50 },
+    parentNode: '2',
+  },
+  { id: '3', data: { label: 'Node 1' }, position: { x: 320, y: 100 }, className: 'light' },
+  {
+    id: '4',
+    data: { label: 'Group B' },
+    position: { x: 320, y: 200 },
+    className: 'light',
+    style: { backgroundColor: 'rgba(255, 0, 0, 0.2)', width: 300, height: 300 },
+  },
+  {
+    id: '4a',
+    data: { label: 'Node B.1' },
+    position: { x: 15, y: 65 },
+    className: 'light',
+    parentNode: '4',
+    extent: 'parent',
+  },
+  {
+    id: '4b',
+    data: { label: 'Group B.A' },
+    position: { x: 15, y: 120 },
+    className: 'light',
+    style: { backgroundColor: 'rgba(255, 0, 255, 0.2)', height: 150, width: 270 },
+    parentNode: '4',
+  },
+  {
+    id: '4b1',
+    data: { label: 'Node B.A.1' },
+    position: { x: 20, y: 40 },
+    className: 'light',
+    parentNode: '4b',
+  },
+  {
+    id: '4b2',
+    data: { label: 'Node B.A.2' },
+    position: { x: 100, y: 100 },
+    className: 'light',
+    parentNode: '4b',
+  },
+];
+
+export const initialEdges = [
+  { id: 'e1-2', source: '1', target: '2', markerEnd: {
+    type: MarkerType.ArrowClosed,
+  },
+  label: 'default closed arrow', },
+  { id: 'e1-3', source: '1', target: '3' },
+  { id: 'e2a-4a', source: '2a', target: '4a' },
+  { id: 'e3-4', source: '3', target: '4', markerEnd: {
+    type: MarkerType.ArrowClosed,
+  },
+  label: 'default closed arrow', },
+  { id: 'e3-4b', source: '3', target: '4b' },
+  { id: 'e4a-4b1', source: '4a', target: '4b1' },
+  { id: 'e4a-4b2', source: '4a', target: '4b2' },
+  { id: 'e4b1-4b2', source: '4b1', target: '4b2' },
+];
