@@ -3,9 +3,10 @@ import { MarkerType } from 'reactflow';
 export const initialNodes = [
   {
     id: '1',
-    type: 'input',
-    // see here to implement: https://reactflow.dev/docs/guides/custom-nodes/
-    data: { label: <input type="text" defaultValue="no way this will work" /> },
+    // type: 'input',
+    // data: { label: <input type="text" defaultValue="no way this will work" /> },
+    data: { label: 'Group Input' },
+    type: 'textUpdater',
     position: { x: 250, y: 5 },
     className: 'light',
   },

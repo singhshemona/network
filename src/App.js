@@ -1,13 +1,28 @@
 import { useCallback } from 'react';
 import './App.css';
 import { initialNodes, initialEdges } from './data.js'
-import ReactFlow, { useNodesState, useEdgesState, addEdge, MiniMap, Background } from 'reactflow';
+import { nodeTypes } from './TextUpdaterNode.js';
+import ReactFlow, { useNodesState, applyNodeChanges, applyEdgeChanges, useEdgesState, addEdge, MiniMap, Background } from 'reactflow';
 import 'reactflow/dist/style.css';
 
 function App() {
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-  const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
+  const [nodes, setNodes] = useNodesState(initialNodes);
+  const [edges, setEdges] = useEdgesState(initialEdges);
+
+  const onNodesChange = useCallback(
+    (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
+    [setNodes]
+  );
+
+  const onEdgesChange = useCallback(
+    (changes) => setEdges((eds) => applyEdgeChanges(changes, eds)),
+    [setEdges]
+  );
+
+  const onConnect = useCallback(
+    (connection) => setEdges((eds) => addEdge(connection, eds)),
+    [setEdges]
+  );
 
   return (
     <div className="App">
@@ -27,6 +42,7 @@ function App() {
           onNodesChange={onNodesChange}
           onEdgesChange={onEdgesChange}
           onConnect={onConnect} 
+          nodeTypes={nodeTypes}
         >
           <Background variant="dots" />
           {nodes.length > 10 && <MiniMap />}
