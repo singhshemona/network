@@ -23,6 +23,15 @@ function App() {
     (connection) => setEdges((eds) => addEdge(connection, eds)),
     [setEdges]
   );
+  
+  const createNewNetwork = () => {
+    // TODO: add a custom confirm
+    // eslint-disable-next-line no-restricted-globals
+    if(confirm('Are you sure you want to create a new Network? This will clear the canvas. Any work you did will not be saved.')) {
+      setNodes(initialNodes)
+      setEdges(initialEdges)
+    }
+  }
 
   return (
     <div className="App">
@@ -31,6 +40,7 @@ function App() {
           <ul>
             <li>Seeing Cognition</li>
             <li>About</li>
+            <li><button onClick={() => createNewNetwork()}>New Network</button></li>
           </ul>
         </menu>
         <h1>Section 1: The Big Picture</h1>

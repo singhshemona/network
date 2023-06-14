@@ -12,6 +12,34 @@ export const initialNodes = [
   },
   {
     id: '2',
+    // type: 'input',
+    // data: { label: <input type="text" defaultValue="no way this will work" /> },
+    data: { label: 'Group Input' },
+    type: 'textUpdater',
+    position: { x: 100, y: 100  },
+    className: 'light',
+  },
+];
+
+export const initialEdges = [
+  { id: '1', source: '1', target: '2', markerEnd: {
+    type: MarkerType.ArrowClosed,
+  },
+  label: 'default closed arrow', },
+];
+
+export const exampleOneNodes = [
+  {
+    id: '1',
+    // type: 'input',
+    // data: { label: <input type="text" defaultValue="no way this will work" /> },
+    data: { label: 'Group Input' },
+    type: 'textUpdater',
+    position: { x: 250, y: 5 },
+    className: 'light',
+  },
+  {
+    id: '2',
     data: { label: 'Group A' },
     position: { x: 100, y: 100 },
     className: 'light',
@@ -63,7 +91,7 @@ export const initialNodes = [
   },
 ];
 
-export const initialEdges = [
+export const exampleOneEdges = [
   { id: 'e1-2', source: '1', target: '2', markerEnd: {
     type: MarkerType.ArrowClosed,
   },
