@@ -1,26 +1,26 @@
+import React from 'react';
 import { useCallback } from 'react';
-import './App.css';
-import { initialNodes, initialEdges } from './data.js'
-import { nodeTypes } from './TextUpdaterNode.js';
-import ReactFlow, { useNodesState, applyNodeChanges, applyEdgeChanges, useEdgesState, addEdge, MiniMap, Background } from 'reactflow';
+import { initialNodes, initialEdges } from './data'
+import { nodeTypes } from './TextUpdaterNode';
+import ReactFlow, { useNodesState, applyNodeChanges, applyEdgeChanges, useEdgesState, addEdge, MiniMap, Background, BackgroundVariant, NodeChange, EdgeChange, Connection, Edge } from 'reactflow';
 import 'reactflow/dist/style.css';
 
-function App() {
+export const App = () => {
   const [nodes, setNodes] = useNodesState(initialNodes);
   const [edges, setEdges] = useEdgesState(initialEdges);
 
   const onNodesChange = useCallback(
-    (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
+    (changes: NodeChange[]) => setNodes((nds) => applyNodeChanges(changes, nds)),
     [setNodes]
   );
 
   const onEdgesChange = useCallback(
-    (changes) => setEdges((eds) => applyEdgeChanges(changes, eds)),
+    (changes: EdgeChange[]) => setEdges((eds) => applyEdgeChanges(changes, eds)),
     [setEdges]
   );
 
   const onConnect = useCallback(
-    (connection) => setEdges((eds) => addEdge(connection, eds)),
+    (connection: Edge | Connection) => setEdges((eds) => addEdge(connection, eds)),
     [setEdges]
   );
   
@@ -40,6 +40,7 @@ function App() {
           <ul>
             <li>Seeing Cognition</li>
             <li>About</li>
+            <li>Examples</li>
             <li><button onClick={() => createNewNetwork()}>New Network</button></li>
           </ul>
         </menu>
@@ -49,17 +50,19 @@ function App() {
         <ReactFlow 
           nodes={nodes}
           edges={edges}
+          nodeTypes={nodeTypes}
+
+          // needed for updating position of nodes or edges
           onNodesChange={onNodesChange}
           onEdgesChange={onEdgesChange}
+
+          // needed for manually connecting two nodes
           onConnect={onConnect} 
-          nodeTypes={nodeTypes}
         >
-          <Background variant="dots" />
+          <Background variant={BackgroundVariant.Dots} />
           {nodes.length > 10 && <MiniMap />}
         </ReactFlow>
       </div>
     </div>
   );
 }
-
-export default App;

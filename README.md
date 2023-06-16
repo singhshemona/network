@@ -1,4 +1,4 @@
-# Connect
+# Network
 ## What is this?
 An exploration into how we might learn more effectively, inspired by [connectivism](https://www.wgu.edu/blog/connectivism-learning-theory2105.html).
 
