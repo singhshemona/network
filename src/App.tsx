@@ -1,35 +1,27 @@
 import React from 'react';
-import { useCallback } from 'react';
-import { initialNodes, initialEdges } from './data'
 import { nodeTypes } from './TextUpdaterNode';
-import ReactFlow, { useNodesState, applyNodeChanges, applyEdgeChanges, useEdgesState, addEdge, MiniMap, Background, BackgroundVariant, NodeChange, EdgeChange, Connection, Edge } from 'reactflow';
+import { shallow } from 'zustand/shallow';
+import useStore, { RFState } from './store';
+import ReactFlow, { MiniMap, Background, BackgroundVariant } from 'reactflow';
 import 'reactflow/dist/style.css';
 
 export const App = () => {
-  const [nodes, setNodes] = useNodesState(initialNodes);
-  const [edges, setEdges] = useEdgesState(initialEdges);
+  const selector = (state: RFState) => ({
+    nodes: state.nodes,
+    edges: state.edges,
+    onNodesChange: state.onNodesChange,
+    onEdgesChange: state.onEdgesChange,
+    onConnect: state.onConnect,
+    revertToInitialState: state.revertToInitialState,
+  });
 
-  const onNodesChange = useCallback(
-    (changes: NodeChange[]) => setNodes((nds) => applyNodeChanges(changes, nds)),
-    [setNodes]
-  );
-
-  const onEdgesChange = useCallback(
-    (changes: EdgeChange[]) => setEdges((eds) => applyEdgeChanges(changes, eds)),
-    [setEdges]
-  );
-
-  const onConnect = useCallback(
-    (connection: Edge | Connection) => setEdges((eds) => addEdge(connection, eds)),
-    [setEdges]
-  );
+  const { nodes, edges, onNodesChange, onEdgesChange, onConnect, revertToInitialState } = useStore(selector, shallow);
   
   const createNewNetwork = () => {
     // TODO: add a custom confirm
     // eslint-disable-next-line no-restricted-globals
     if(confirm('Are you sure you want to create a new Network? This will clear the canvas. Any work you did will not be saved.')) {
-      setNodes(initialNodes)
-      setEdges(initialEdges)
+      revertToInitialState()
     }
   }
 
@@ -51,12 +43,8 @@ export const App = () => {
           nodes={nodes}
           edges={edges}
           nodeTypes={nodeTypes}
-
-          // needed for updating position of nodes or edges
           onNodesChange={onNodesChange}
           onEdgesChange={onEdgesChange}
-
-          // needed for manually connecting two nodes
           onConnect={onConnect} 
         >
           <Background variant={BackgroundVariant.Dots} />
