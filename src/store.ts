@@ -14,7 +14,6 @@ import {
   applyEdgeChanges,
 } from 'reactflow';
 
-
 export type RFState = {
   nodes: Node[];
   edges: Edge[];
@@ -22,6 +21,8 @@ export type RFState = {
   onEdgesChange: OnEdgesChange;
   onConnect: OnConnect;
   revertToInitialState: () => void;
+  onUpdatePrompt: (id: string, text: string) => void;
+  onUpdateAnswer: (id: string, text: string) => void;
 };
 
 const useStore = create<RFState>((set, get) => ({
@@ -40,6 +41,26 @@ const useStore = create<RFState>((set, get) => ({
   onConnect: (connection: Connection) => {
     set({
       edges: addEdge(connection, get().edges),
+    });
+  },
+  onUpdatePrompt: (id: string, text: string) => {
+    set({
+      nodes: get().nodes.map((node) => {
+        if (node.id === id) {
+          node.data = { ...node.data, prompt: text };
+        }
+        return node;
+      }),
+    });
+  },
+  onUpdateAnswer: (id: string, text: string) => {
+    set({
+      nodes: get().nodes.map((node) => {
+        if (node.id === id) {
+          node.data = { ...node.data, answer: text };
+        }
+        return node;
+      }),
     });
   },
   revertToInitialState: () => {

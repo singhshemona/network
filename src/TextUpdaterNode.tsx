@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { useCallback } from 'react';
+import useStore, { RFState } from './store';
+import { shallow } from 'zustand/shallow';
 import { Handle, Position, NodeProps } from 'reactflow';
 
 type TextUpdaterNodeProps = {
@@ -9,15 +10,14 @@ type TextUpdaterNodeProps = {
 
 const TextUpdaterNode = ({ data, id }: NodeProps<TextUpdaterNodeProps>) => {
   const [isEditActive, setIsEditActive] = useState(false);
-  const onPromptChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(id);
-  }, [id]);
 
-  const onAnswerChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.value);
-  }, []);
+  const selector = (state: RFState) => ({
+    onUpdatePrompt: state.onUpdatePrompt,
+    onUpdateAnswer: state.onUpdateAnswer,
+  });
 
-  console.log(data)
+  const { onUpdatePrompt, onUpdateAnswer } = useStore(selector, shallow);
+
   return (
     <div className="text-updater-node">
       <Handle type="target" position={Position.Top} isConnectable />
@@ -26,10 +26,10 @@ const TextUpdaterNode = ({ data, id }: NodeProps<TextUpdaterNodeProps>) => {
       {isEditActive ?
         <>
           <label htmlFor="prompt">Prompt:
-            <input id="prompt" name="prompt" onChange={onPromptChange} className="nodrag" />
+            <input id="prompt" name="prompt" onChange={(event: React.ChangeEvent<HTMLInputElement>) => onUpdatePrompt(id, event.target.value)} className="nodrag" />
           </label>
           <label htmlFor="answer">Answer:
-            <input id="answer" name="answer" onChange={onAnswerChange} className="nodrag" />
+            <input id="answer" name="answer" onChange={(event: React.ChangeEvent<HTMLInputElement>) => onUpdateAnswer(id, event.target.value)} className="nodrag" />
           </label>
         </>
         :

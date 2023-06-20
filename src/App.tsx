@@ -25,6 +25,9 @@ export const App = () => {
     }
   }
 
+  // not great, figure out better way to warn on refresh
+  // window.onbeforeunload = () => createNewNetwork;
+
   return (
     <div className="App">
       <header>
