@@ -12,6 +12,7 @@ import {
   OnConnect,
   applyNodeChanges,
   applyEdgeChanges,
+  NodeAddChange,
 } from 'reactflow';
 
 export type RFState = {
@@ -23,6 +24,7 @@ export type RFState = {
   revertToInitialState: () => void;
   onUpdatePrompt: (id: string, text: string) => void;
   onUpdateAnswer: (id: string, text: string) => void;
+  addNewNode: (changes: NodeAddChange[]) => void;
 };
 
 const useStore = create<RFState>((set, get) => ({
@@ -69,6 +71,12 @@ const useStore = create<RFState>((set, get) => ({
       edges: initialEdges,
     });
   },
+  addNewNode: (changes: NodeAddChange[]) => {
+    set({
+      nodes: applyNodeChanges(changes, get().nodes),
+    });
+  },
+
 }));
 
 export default useStore;
