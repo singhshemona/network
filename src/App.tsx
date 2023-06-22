@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useRef } from 'react';
 import { nodeTypes } from './TextUpdaterNode';
 import { shallow } from 'zustand/shallow';
 import useStore, { RFState } from './store';
@@ -18,38 +18,30 @@ export const App = () => {
 
   const { nodes, edges, onNodesChange, onEdgesChange, onConnect, revertToInitialState, addNewNode } = useStore(selector, shallow);
 
-  useEffect(() => {
-    // THIS IS WORKING
-    const getCoordinates = (event: MouseEvent) => {
-      console.log(event.clientX, event.clientY)
+  const reactFlowRef = useRef<HTMLInputElement>(null);
   
-      const newNode = {
-        id: (nodes.length + 1).toString(),
-        data: { prompt: '', answer: '' },
-        type: 'textUpdater',
-        position: { x: event.clientX, y: event.clientY },
-        className: 'light',
-      };
+  const addNode = (event: React.MouseEvent<HTMLElement>) => {
+    let container = document.querySelector('.react-flow__nodes');
+    if(event.target instanceof HTMLElement && container?.contains(event.target)) return;
 
-      addNewNode([{item: newNode, type: 'add'}])
-    }
+    // TODO: This needs to be debugged
+    const bounds = reactFlowRef.current && reactFlowRef.current.getBoundingClientRect();
+    const position = {
+      x: event.clientX - (bounds ? bounds.left : 0),
+      y: event.clientY - (bounds ? bounds.top : 0)
+    };
   
-    const background = document.querySelector('.react-flow__background')
+    const newNode = {
+      id: (nodes.length + 1).toString(),
+      data: { prompt: '', answer: '' },
+      type: 'textUpdater',
+      // position: { x: event.clientX, y: event.clientY },
+      position: position,
+      className: 'light',
+    };
 
-    if(background) {
-      console.log('this is running')
-
-      // THIS IS NOT
-      background.addEventListener('mouseup', () => getCoordinates)
-    }
-
-    // return () => {
-    //   window.removeEventListener(
-    //     'mousedown',
-    //     getCoordinates
-    //   );
-    // };
-  }, [addNewNode, nodes.length])
+    addNewNode([{item: newNode, type: 'add'}])
+  }
 
   const createNewNetwork = () => {
     // TODO: add a custom confirm
@@ -60,7 +52,7 @@ export const App = () => {
   }
 
   // not great, figure out better way to warn on refresh
-  // window.onbeforeunload = () => createNewNetwork;
+  window.onbeforeunload = () => createNewNetwork;
 
   return (
     <div className="App">
@@ -74,6 +66,7 @@ export const App = () => {
           </ul>
         </menu>
         <h1>Section 1: The Big Picture</h1>
+        <p>To add a new node, click anywhere on the canvas</p>
       </header>
       <div style={{ width: '100vw', height: '100vh' }}>
         <ReactFlow 
@@ -83,11 +76,10 @@ export const App = () => {
           onNodesChange={onNodesChange}
           onEdgesChange={onEdgesChange}
           onConnect={onConnect}
+          onClick={addNode}
+          ref={reactFlowRef}
         >
-          <div className='testing'>
-            <Background variant={BackgroundVariant.Dots} />
-          </div>
-          
+          <Background variant={BackgroundVariant.Dots} />
           {nodes.length > 10 && <MiniMap />}
         </ReactFlow>
       </div>
