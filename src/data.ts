@@ -3,32 +3,44 @@ import { MarkerType } from 'reactflow';
 export const initialNodes = [
   {
     id: '1',
-    data: { prompt: '', answer: '' },
-    type: 'textUpdater',
+    data: { 
+      prompt: 'Why isn’t 1 a prime number?', 
+      answer: 'For a number to be prime, it must have two distinct factors, one and itself. For 1, 1 and itself is not distinct.' 
+    },
+    type: 'textUpdaterNode',
     position: { x: 250, y: 5 },
     className: 'light',
   },
   {
     id: '2',
-    data: { prompt: '', answer: '' },
-    type: 'textUpdater',
+    data: { 
+      prompt: 'What is the difference between a rational and irrational number?', 
+      answer: 'Rational numbers can be written as a fraction or ratio and irrational cannot be written as a fraction or ratio.' 
+    },
+    type: 'textUpdaterNode',
     position: { x: 100, y: 100  },
     className: 'light',
   },
 ];
 
 export const initialEdges = [
-  { id: '1', source: '1', target: '2', markerEnd: {
-    type: MarkerType.ArrowClosed,
+  { 
+    id: '1', 
+    source: '1', 
+    target: '2', 
+    type: 'textUpdaterEdge',
+    markerEnd: {
+      type: MarkerType.ArrowClosed,
+    },
+    data: { connection: 'default closed arrow' },
   },
-  label: 'default closed arrow', },
 ];
 
 export const exampleOneNodes = [
   {
     id: '1',
     data: { prompt: '', answer: '' },
-    type: 'textUpdater',
+    // type: 'textUpdater',
     position: { x: 250, y: 5 },
     className: 'light',
   },

@@ -1,5 +1,6 @@
-import React, { useRef } from 'react';
-import { nodeTypes } from './TextUpdaterNode';
+import React, { useRef, useMemo } from 'react';
+import { TextUpdaterNode } from './TextUpdaterNode';
+import { TextUpdaterEdge } from './TextUpdaterEdge';
 import { shallow } from 'zustand/shallow';
 import useStore, { RFState } from './store';
 import ReactFlow, { MiniMap, Background, BackgroundVariant } from 'reactflow';
@@ -9,18 +10,34 @@ export const App = () => {
   const selector = (state: RFState) => ({
     nodes: state.nodes,
     edges: state.edges,
+    studyMode: state.studyMode,
     onNodesChange: state.onNodesChange,
     onEdgesChange: state.onEdgesChange,
     onConnect: state.onConnect,
     revertToInitialState: state.revertToInitialState,
-    addNewNode: state.addNewNode
+    addNewNode: state.addNewNode,
+    setStudyMode: state.setStudyMode,
   });
 
-  const { nodes, edges, onNodesChange, onEdgesChange, onConnect, revertToInitialState, addNewNode } = useStore(selector, shallow);
+  const { 
+    nodes, 
+    edges, 
+    studyMode, 
+    onNodesChange, 
+    onEdgesChange, 
+    onConnect, 
+    revertToInitialState, 
+    addNewNode, 
+    setStudyMode 
+  } = useStore(selector, shallow);
+
+  const nodeTypes = useMemo(() => ({ textUpdaterNode: TextUpdaterNode }), []);
+  const edgeTypes = useMemo(() => ({ textUpdaterEdge: TextUpdaterEdge }), []);
 
   const reactFlowRef = useRef<HTMLInputElement>(null);
   
   const addNode = (event: React.MouseEvent<HTMLElement>) => {
+    // don't run if we clicked on the nodes
     let container = document.querySelector('.react-flow__nodes');
     if(event.target instanceof HTMLElement && container?.contains(event.target)) return;
 
@@ -33,8 +50,8 @@ export const App = () => {
   
     const newNode = {
       id: (nodes.length + 1).toString(),
-      data: { prompt: '', answer: '' },
-      type: 'textUpdater',
+      data: { prompt: 'click to add prompt', answer: 'click to add answer' },
+      type: 'textUpdaterNode',
       // position: { x: event.clientX, y: event.clientY },
       position: position,
       className: 'light',
@@ -63,6 +80,7 @@ export const App = () => {
             <li>About</li>
             <li>Examples</li>
             <li><button onClick={() => createNewNetwork()}>New Network</button></li>
+            <li><button onClick={() => setStudyMode(!studyMode)}>Study Mode: {studyMode ? 'ON' : 'OFF'}</button></li>
           </ul>
         </menu>
         <h1>Section 1: The Big Picture</h1>
@@ -73,6 +91,7 @@ export const App = () => {
           nodes={nodes}
           edges={edges}
           nodeTypes={nodeTypes}
+          edgeTypes={edgeTypes}
           onNodesChange={onNodesChange}
           onEdgesChange={onEdgesChange}
           onConnect={onConnect}

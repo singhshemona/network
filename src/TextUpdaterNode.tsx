@@ -3,12 +3,7 @@ import useStore, { RFState } from './store';
 import { shallow } from 'zustand/shallow';
 import { Handle, Position, NodeProps } from 'reactflow';
 
-type TextUpdaterNodeProps = {
-  prompt?: string;
-  answer?: string;
-}
-
-const TextUpdaterNode = ({ data, id }: NodeProps<TextUpdaterNodeProps>) => {
+export const TextUpdaterNode = ({ data, id }: NodeProps) => {
   const [isEditActive, setIsEditActive] = useState(false);
 
   const selector = (state: RFState) => ({
@@ -17,30 +12,38 @@ const TextUpdaterNode = ({ data, id }: NodeProps<TextUpdaterNodeProps>) => {
   });
 
   const { onUpdatePrompt, onUpdateAnswer } = useStore(selector, shallow);
+  const { prompt, answer } = data;
 
   return (
-    <div className="text-updater-node">
+    <div>
       <Handle type="target" position={Position.Top} isConnectable />
-      <p>test</p>
-      <button onClick={() => setIsEditActive(prevState => !prevState)}>{isEditActive ? 'save' : 'edit'}</button>
       {isEditActive ?
-        <>
+        <form>
           <label htmlFor="prompt">Prompt:
-            <input id="prompt" name="prompt" onChange={(event: React.ChangeEvent<HTMLInputElement>) => onUpdatePrompt(id, event.target.value)} className="nodrag" />
+            <input 
+              id="prompt" 
+              name="prompt" 
+              value={prompt}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => onUpdatePrompt(id, event.target.value)} 
+              className="nodrag" />
           </label>
           <label htmlFor="answer">Answer:
-            <input id="answer" name="answer" onChange={(event: React.ChangeEvent<HTMLInputElement>) => onUpdateAnswer(id, event.target.value)} className="nodrag" />
+            <input 
+              id="answer" 
+              name="answer" 
+              value={answer}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => onUpdateAnswer(id, event.target.value)} 
+              className="nodrag" />
           </label>
-        </>
+          <button onClick={() => setIsEditActive(false)}>Save</button>
+        </form>
         :
-        <>
-          <p>{data.prompt ? data.prompt : ''}</p>
-          <p>{data.answer ? data.answer : ''}</p>
-        </>
+        <div onClick={() => setIsEditActive(true)}>
+          {prompt && <p>{prompt}</p>}
+          {answer && <p>{answer}</p>}
+        </div>
       }
       <Handle type="source" position={Position.Bottom} id="b" isConnectable />
     </div>
   );
 }
-
-export const nodeTypes = { textUpdater: TextUpdaterNode };
