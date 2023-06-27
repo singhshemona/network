@@ -1,69 +1,22 @@
-import React, { useRef, useMemo } from 'react';
-import { TextUpdaterNode } from './TextUpdaterNode';
-import { TextUpdaterEdge } from './TextUpdaterEdge';
+import React from 'react';
 import { shallow } from 'zustand/shallow';
 import useStore, { RFState } from './store';
-import ReactFlow, { MiniMap, Background, BackgroundVariant } from 'reactflow';
+import { ReactFlowProvider } from 'reactflow';
 import 'reactflow/dist/style.css';
+import { Network } from './Network';
 
 export const App = () => {
   const selector = (state: RFState) => ({
-    nodes: state.nodes,
-    edges: state.edges,
     studyMode: state.studyMode,
-    onNodesChange: state.onNodesChange,
-    onEdgesChange: state.onEdgesChange,
-    onConnect: state.onConnect,
     revertToInitialState: state.revertToInitialState,
-    addNewNode: state.addNewNode,
     setStudyMode: state.setStudyMode,
   });
 
-  const { 
-    nodes, 
-    edges, 
+  const {
     studyMode, 
-    onNodesChange, 
-    onEdgesChange, 
-    onConnect, 
     revertToInitialState, 
-    addNewNode, 
     setStudyMode 
   } = useStore(selector, shallow);
-
-  const nodeTypes = useMemo(() => ({ textUpdaterNode: TextUpdaterNode }), []);
-  const edgeTypes = useMemo(() => ({ textUpdaterEdge: TextUpdaterEdge }), []);
-
-  const reactFlowRef = useRef<HTMLInputElement>(null);
-  
-  const addNode = (event: React.MouseEvent<HTMLElement>) => {
-    // don't run if we clicked on the nodes
-    let container = document.querySelector('.react-flow__nodes');
-    if(event.target instanceof HTMLElement && container?.contains(event.target)) return;
-
-    // TODO: This needs to be debugged
-    const bounds = reactFlowRef.current && reactFlowRef.current.getBoundingClientRect();
-    const position = {
-      x: event.clientX - (bounds ? bounds.left : 0),
-      y: event.clientY - (bounds ? bounds.top : 0)
-    };
-
-    console.log()
-  
-    const newNode = {
-      id: (nodes.length + 1).toString(),
-      data: { 
-        prompt: 'click to edit prompt', 
-        answer: 'click to edit answer' 
-      },
-      type: 'textUpdaterNode',
-      // position: { x: event.clientX, y: event.clientY },
-      position: position,
-      className: 'light',
-    };
-
-    addNewNode([{item: newNode, type: 'add'}])
-  }
 
   const createNewNetwork = () => {
     // TODO: add a custom confirm
@@ -92,20 +45,9 @@ export const App = () => {
         <p>To add a new node, click anywhere on the canvas</p>
       </header>
       <div style={{ width: '100vw', height: '100vh' }}>
-        <ReactFlow 
-          nodes={nodes}
-          edges={edges}
-          nodeTypes={nodeTypes}
-          edgeTypes={edgeTypes}
-          onNodesChange={onNodesChange}
-          onEdgesChange={onEdgesChange}
-          onConnect={onConnect}
-          onClick={addNode}
-          ref={reactFlowRef}
-        >
-          <Background variant={BackgroundVariant.Dots} />
-          {nodes.length > 10 && <MiniMap />}
-        </ReactFlow>
+      <ReactFlowProvider>
+        <Network />
+      </ReactFlowProvider>
       </div>
     </div>
   );

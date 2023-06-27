@@ -14,6 +14,7 @@ export const TextUpdaterNode = ({ data, id }: NodeProps) => {
   const { onUpdatePrompt, onUpdateAnswer } = useStore(selector, shallow);
   const { prompt, answer } = data;
 
+  console.log(prompt.length)
   return (
     <div>
       <Handle type="target" position={Position.Top} isConnectable />
@@ -39,8 +40,9 @@ export const TextUpdaterNode = ({ data, id }: NodeProps) => {
         </form>
         :
         <div onClick={() => setIsEditActive(true)}>
-          {prompt && <p>{prompt}</p>}
-          {answer && <p>{answer}</p>}
+          {/* TODO: address case for when prompt and answer text are emptied and saved */}
+          {prompt && <p>{prompt ? prompt : 'click to edit prompt'}</p>}
+          {answer && <p>{answer ? answer : 'click to edit answer'}</p>}
         </div>
       }
       <Handle type="source" position={Position.Bottom} id="b" isConnectable />
