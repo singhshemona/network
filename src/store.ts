@@ -44,9 +44,12 @@ const useStore = create<RFState>((set, get) => ({
       edges: applyEdgeChanges(changes, get().edges),
     });
   },
-  onConnect: (connection: Connection) => {
+  onConnect: (params: Connection) => {
     set({
-      edges: addEdge(connection, get().edges),
+      edges: addEdge({ ...params, 
+        data: { connection: 'click to edit connection'},
+        type: 'textUpdaterEdge',
+      }, get().edges),
     });
   },
   onUpdateEdge: (id: string, text: string) => {

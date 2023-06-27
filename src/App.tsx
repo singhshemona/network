@@ -47,10 +47,15 @@ export const App = () => {
       x: event.clientX - (bounds ? bounds.left : 0),
       y: event.clientY - (bounds ? bounds.top : 0)
     };
+
+    console.log()
   
     const newNode = {
       id: (nodes.length + 1).toString(),
-      data: { prompt: 'click to add prompt', answer: 'click to add answer' },
+      data: { 
+        prompt: 'click to edit prompt', 
+        answer: 'click to edit answer' 
+      },
       type: 'textUpdaterNode',
       // position: { x: event.clientX, y: event.clientY },
       position: position,

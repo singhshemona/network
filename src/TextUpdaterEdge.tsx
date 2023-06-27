@@ -67,9 +67,7 @@ export const TextUpdaterEdge = ({
               <button onClick={() => setIsEditActive(false)}>Save</button>
             </form>
             :
-            <>
-              {connection && <span onClick={(event) => onClickEdge(event)}>{connection ? connection : 'click to add connection'}</span>}
-            </>
+            <span onClick={(event) => onClickEdge(event)}>{connection ? connection : 'click to edit connection'}</span>
           }
         </div>
       </EdgeLabelRenderer>

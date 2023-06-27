@@ -32,7 +32,7 @@ export const initialEdges = [
     markerEnd: {
       type: MarkerType.ArrowClosed,
     },
-    data: { connection: 'default closed arrow' },
+    data: { connection: 'how prime and irrational connect' },
   },
 ];
 
