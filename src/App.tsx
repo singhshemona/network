@@ -38,7 +38,7 @@ export const App = () => {
             <li>About</li>
             <li>Examples</li>
             <li><button onClick={() => createNewNetwork()}>New Network</button></li>
-            <li><button onClick={() => setStudyMode(!studyMode)}>Study Mode: {studyMode ? 'ON' : 'OFF'}</button></li>
+            <li>Study Mode: <button onClick={() => setStudyMode(!studyMode)}>{studyMode ? 'ON' : 'OFF'}</button></li>
           </ul>
         </menu>
         <h1>Section 1: The Big Picture</h1>

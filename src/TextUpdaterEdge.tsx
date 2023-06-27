@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import useStore, { RFState } from './store';
 import { shallow } from 'zustand/shallow';
 import { EdgeProps, EdgeLabelRenderer, BaseEdge, getBezierPath } from 'reactflow';
@@ -15,17 +15,34 @@ export const TextUpdaterEdge = ({
   markerEnd
 }: EdgeProps) => {
   const [isEditActive, setIsEditActive] = useState(false);
+  const [internalStudyMode, setInternalStudyMode] = useState(false);
 
   const selector = (state: RFState) => ({
     onUpdateEdge: state.onUpdateEdge,
+    studyMode: state.studyMode,
   });
 
-  const { onUpdateEdge } = useStore(selector, shallow);
+  const { onUpdateEdge, studyMode } = useStore(selector, shallow);
   const { connection } = data;
 
-  const onClickEdge = (event: React.MouseEvent<HTMLElement>) => {
-    event.stopPropagation(); 
-    setIsEditActive(true)
+  useEffect(() => {
+    setInternalStudyMode(studyMode ? true : false)
+  }, [studyMode])
+
+  const getEdgeText = (connection: string): string => {
+    if(internalStudyMode && connection) {
+      return 'click to reveal connection'
+    } else if(connection) {
+      return connection
+    } else return 'click to edit connection'
+  }
+
+  const onEdgeClick = () => {
+    if(internalStudyMode) {
+      setInternalStudyMode(false)
+    } else {
+      setIsEditActive(true)
+    }
   }
 
   const [edgePath, labelX, labelY] = getBezierPath({
@@ -67,7 +84,7 @@ export const TextUpdaterEdge = ({
               <button onClick={() => setIsEditActive(false)}>Save</button>
             </form>
             :
-            <span onClick={(event) => onClickEdge(event)}>{connection ? connection : 'click to edit connection'}</span>
+            <span onClick={onEdgeClick}>{getEdgeText(connection)}</span>
           }
         </div>
       </EdgeLabelRenderer>
