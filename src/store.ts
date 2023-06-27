@@ -12,7 +12,6 @@ import {
   OnConnect,
   applyNodeChanges,
   applyEdgeChanges,
-  NodeAddChange,
 } from 'reactflow';
 
 export type RFState = {
@@ -26,7 +25,7 @@ export type RFState = {
   onUpdateEdge: (id: string, text: string) => void;
   onUpdatePrompt: (id: string, text: string) => void;
   onUpdateAnswer: (id: string, text: string) => void;
-  addNewNode: (changes: NodeAddChange[]) => void;
+  addNewNode: (position: {x: number, y: number}) => void;
   setStudyMode: (boolean: boolean) => void;
 };
 
@@ -88,9 +87,20 @@ const useStore = create<RFState>((set, get) => ({
       edges: initialEdges,
     });
   },
-  addNewNode: (changes: NodeAddChange[]) => {
+  addNewNode: (position: {x: number, y: number}) => {
+    const newNode = {
+      id: (get().nodes.length + 1).toString(),
+      data: { 
+        prompt: 'click to edit prompt', 
+        answer: 'click to edit answer' 
+      },
+      type: 'textUpdaterNode',
+      position: position,
+      className: 'light',
+    };
+
     set({
-      nodes: applyNodeChanges(changes, get().nodes),
+      nodes: applyNodeChanges([{item: newNode, type: 'add'}], get().nodes),
     });
   },
   setStudyMode: (boolean: boolean) => {

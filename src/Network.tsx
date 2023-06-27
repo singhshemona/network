@@ -31,7 +31,7 @@ export const Network = () => {
   const reactFlowRef = useRef<HTMLInputElement>(null);
   const reactFlowInstance = useReactFlow();
 
-  const addNode = (event: React.MouseEvent<HTMLElement>) => {
+  const getNewNodePosition = (event: React.MouseEvent<HTMLElement>) => {
     // don't run if we clicked within the existing network
     let container = document.querySelector('.react-flow__viewport');
     if(event.target instanceof HTMLElement && container?.contains(event.target)) return;
@@ -41,19 +41,8 @@ export const Network = () => {
       x: event.clientX - (bounds ? bounds.left : 0),
       y: event.clientY - (bounds ? bounds.top : 0)
     });
-  
-    const newNode = {
-      id: (nodes.length + 1).toString(),
-      data: { 
-        prompt: 'click to edit prompt', 
-        answer: 'click to edit answer' 
-      },
-      type: 'textUpdaterNode',
-      position: position,
-      className: 'light',
-    };
 
-    addNewNode([{item: newNode, type: 'add'}])
+    addNewNode(position)
   }
 
   return (
@@ -65,7 +54,7 @@ export const Network = () => {
       onNodesChange={onNodesChange}
       onEdgesChange={onEdgesChange}
       onConnect={onConnect}
-      onClick={addNode}
+      onClick={getNewNodePosition}
       ref={reactFlowRef}
     >
       <Background variant={BackgroundVariant.Dots} />

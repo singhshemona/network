@@ -42,7 +42,7 @@ export const App = () => {
           </ul>
         </menu>
         <h1>Section 1: The Big Picture</h1>
-        <p>To add a new node, click anywhere on the canvas</p>
+        <p>To add a new node, click anywhere on the canvas. To delete a node or edge, click on it and hit your keyboard's delete button.</p>
       </header>
       <div style={{ width: '100vw', height: '100vh' }}>
       <ReactFlowProvider>
