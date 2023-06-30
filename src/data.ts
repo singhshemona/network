@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import { MarkerType } from 'reactflow';
 
 export const initialNodes = [
@@ -30,7 +31,7 @@ export const initialNodes = [
       }
     },
     type: 'textUpdaterNode',
-    position: { x: 100, y: 100  },
+    position: { x: 100, y: 300  },
     className: 'light',
   },
 ];
@@ -66,7 +67,7 @@ export const exampleOneNodes = [
         interval: 0,
         repetition: 0,
         efactor: 2.5,
-        // dueDate: dayjs(Date.now()).toISOString(),
+        dueDate: dayjs(Date.now()).toISOString(),
       }
    },
     type: 'textUpdaterNode',
@@ -135,7 +136,7 @@ export const exampleOneEdges = [
         interval: 0,
         repetition: 0,
         efactor: 2.5,
-        // dueDate: dayjs(Date.now()).toISOString(),
+        dueDate: dayjs(Date.now()).toISOString(),
       }
     },
     source: '1', 
