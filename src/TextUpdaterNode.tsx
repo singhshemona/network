@@ -40,7 +40,7 @@ export const TextUpdaterNode = ({ data, id }: NodeProps) => {
 
   return (
     <div>
-      <Handle type="target" position={Position.Top} isConnectable />
+      <Handle type="source" position={Position.Top} id="a" />
       {isEditActive ?
         <form>
           <label htmlFor="prompt">Prompt:
@@ -63,12 +63,11 @@ export const TextUpdaterNode = ({ data, id }: NodeProps) => {
         </form>
         :
         <div onClick={onNodeClick}>
-          {/* TODO: address case for when prompt and answer text are emptied and saved */}
           <p>{getNodeText(prompt, 'prompt')}</p>
           <p>{getNodeText(answer, 'answer')}</p>
         </div>
       }
-      <Handle type="source" position={Position.Bottom} id="b" isConnectable />
+      <Handle type="target" position={Position.Bottom} id="b" />
     </div>
   );
 }
