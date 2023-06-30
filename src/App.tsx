@@ -4,6 +4,7 @@ import useStore, { RFState } from './store';
 import { ReactFlowProvider } from 'reactflow';
 import 'reactflow/dist/style.css';
 import { Network } from './Network';
+import { LevelOfDifficulty } from './LevelOfDifficulty';
 
 export const App = () => {
   const selector = (state: RFState) => ({
@@ -41,6 +42,7 @@ export const App = () => {
             <li>Study Mode: <button onClick={() => setStudyMode(!studyMode)}>{studyMode ? 'ON' : 'OFF'}</button></li>
           </ul>
         </menu>
+        {studyMode && <LevelOfDifficulty />}
         <h1>Section 1: The Big Picture</h1>
         <p>To add a new node, click anywhere on the canvas. To delete a node or edge, click on it and hit your keyboard's delete button.</p>
       </header>

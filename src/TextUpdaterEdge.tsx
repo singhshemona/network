@@ -20,9 +20,10 @@ export const TextUpdaterEdge = ({
   const selector = (state: RFState) => ({
     onUpdateEdge: state.onUpdateEdge,
     studyMode: state.studyMode,
+    setCurrentlyStudying: state.setCurrentlyStudying,
   });
 
-  const { onUpdateEdge, studyMode } = useStore(selector, shallow);
+  const { onUpdateEdge, studyMode, setCurrentlyStudying } = useStore(selector, shallow);
   const { connection } = data;
 
   useEffect(() => {
@@ -39,6 +40,7 @@ export const TextUpdaterEdge = ({
 
   const onEdgeClick = () => {
     if(internalStudyMode) {
+      setCurrentlyStudying('edge', id)
       setInternalStudyMode(false)
     } else {
       setIsEditActive(true)

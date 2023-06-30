@@ -5,7 +5,13 @@ export const initialNodes = [
     id: '1',
     data: { 
       prompt: 'Why isn’t 1 a prime number?', 
-      answer: 'For a number to be prime, it must have two distinct factors, one and itself. For 1, 1 and itself is not distinct.' 
+      answer: 'For a number to be prime, it must have two distinct factors, one and itself. For 1, 1 and itself is not distinct.',
+      grade: {
+        interval: 0,
+        repetition: 0,
+        efactor: 2.5,
+        dueDate: '',
+      }
     },
     type: 'textUpdaterNode',
     position: { x: 250, y: 5 },
@@ -15,7 +21,13 @@ export const initialNodes = [
     id: '2',
     data: { 
       prompt: 'What is the difference between a rational and irrational number?', 
-      answer: 'Rational numbers can be written as a fraction or ratio and irrational cannot be written as a fraction or ratio.' 
+      answer: 'Rational numbers can be written as a fraction or ratio and irrational cannot be written as a fraction or ratio.',
+      grade: {
+        interval: 0,
+        repetition: 0,
+        efactor: 2.5,
+        dueDate: '',
+      }
     },
     type: 'textUpdaterNode',
     position: { x: 100, y: 100  },
@@ -32,15 +44,32 @@ export const initialEdges = [
     markerEnd: {
       type: MarkerType.ArrowClosed,
     },
-    data: { connection: 'how prime and irrational connect' },
+    data: { 
+      connection: 'how prime and irrational connect',
+      grade: {
+        interval: 0,
+        repetition: 0,
+        efactor: 2.5,
+        dueDate: '',
+      }
+    },
   },
 ];
 
 export const exampleOneNodes = [
   {
     id: '1',
-    data: { prompt: '', answer: '' },
-    // type: 'textUpdater',
+    data: { 
+      prompt: '', 
+      answer: '', 
+      grade: {
+        interval: 0,
+        repetition: 0,
+        efactor: 2.5,
+        // dueDate: dayjs(Date.now()).toISOString(),
+      }
+   },
+    type: 'textUpdaterNode',
     position: { x: 250, y: 5 },
     className: 'light',
   },
@@ -98,10 +127,24 @@ export const exampleOneNodes = [
 ];
 
 export const exampleOneEdges = [
-  { id: 'e1-2', source: '1', target: '2', markerEnd: {
-    type: MarkerType.ArrowClosed,
+  { 
+    id: 'e1-2', 
+    data: { 
+      connection: '',
+      grade: {
+        interval: 0,
+        repetition: 0,
+        efactor: 2.5,
+        // dueDate: dayjs(Date.now()).toISOString(),
+      }
+    },
+    source: '1', 
+    target: '2', 
+    markerEnd: {
+      type: MarkerType.ArrowClosed,
+    },
+    type: 'textUpdaterEdge',
   },
-  label: 'default closed arrow', },
   { id: 'e1-3', source: '1', target: '3' },
   { id: 'e2a-4a', source: '2a', target: '4a' },
   { id: 'e3-4', source: '3', target: '4', markerEnd: {

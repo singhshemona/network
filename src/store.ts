@@ -27,6 +27,10 @@ export type RFState = {
   onUpdateAnswer: (id: string, text: string) => void;
   addNewNode: (position: {x: number, y: number}) => void;
   setStudyMode: (boolean: boolean) => void;
+  currentlyStudying: {type: string | undefined, id: string | undefined};
+  setCurrentlyStudying: (type: string, id: string) => void;
+  setNodeScore: (score: number) => void;
+  setEdgeScore: (score: number) => void;
 };
 
 const useStore = create<RFState>((set, get) => ({
@@ -46,7 +50,15 @@ const useStore = create<RFState>((set, get) => ({
   onConnect: (params: Connection) => {
     set({
       edges: addEdge({ ...params, 
-        data: { connection: 'click to edit connection'},
+        data: { 
+          connection: 'click to edit connection',
+          grade: {
+            interval: 0,
+            repetition: 0,
+            efactor: 2.5,
+            dueDate: '',
+          }
+        },
         type: 'textUpdaterEdge',
       }, get().edges),
     });
@@ -92,7 +104,13 @@ const useStore = create<RFState>((set, get) => ({
       id: (get().nodes.length + 1).toString(),
       data: { 
         prompt: 'click to edit prompt', 
-        answer: 'click to edit answer' 
+        answer: 'click to edit answer',
+        grade: {
+          interval: 0,
+          repetition: 0,
+          efactor: 2.5,
+          dueDate: '',
+        }
       },
       type: 'textUpdaterNode',
       position: position,
@@ -107,7 +125,37 @@ const useStore = create<RFState>((set, get) => ({
     set({
       studyMode: boolean,
     })
-  }
+  },
+  currentlyStudying: {type: undefined, id: undefined},
+  setCurrentlyStudying: (type: string, id: string) => {
+    set({
+      currentlyStudying: {type: type, id: id},
+    })
+  },
+
+
+  // in these functions is where I do supermemo practice function stuff
+  setNodeScore: (score: number) => {
+    set({
+      nodes: get().nodes.map((node) => {
+        if (node.id === get().currentlyStudying.id) {
+          node.data.grade = { ...node.data.grade };
+          // node.data.grade = practice(flashcard, score);
+        }
+        return node;
+      }),
+    });
+  },
+  setEdgeScore: (score: number) => {
+    set({
+      edges: get().edges.map((edge) => {
+        if (edge.id === get().currentlyStudying.id) {
+          edge.data.grade = { ...edge.data.grade };
+        }
+        return edge;
+      }),
+    });
+  },
 }));
 
 export default useStore;

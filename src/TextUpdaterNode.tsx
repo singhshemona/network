@@ -11,9 +11,10 @@ export const TextUpdaterNode = ({ data, id }: NodeProps) => {
     onUpdatePrompt: state.onUpdatePrompt,
     onUpdateAnswer: state.onUpdateAnswer,
     studyMode: state.studyMode,
+    setCurrentlyStudying: state.setCurrentlyStudying,
   });
 
-  const { onUpdatePrompt, onUpdateAnswer, studyMode } = useStore(selector, shallow);
+  const { onUpdatePrompt, onUpdateAnswer, studyMode, setCurrentlyStudying } = useStore(selector, shallow);
   const { prompt, answer } = data;
 
   useEffect(() => {
@@ -32,6 +33,7 @@ export const TextUpdaterNode = ({ data, id }: NodeProps) => {
 
   const onNodeClick = () => {
     if(internalStudyMode) {
+      setCurrentlyStudying('node', id)
       setInternalStudyMode(false)
     } else {
       setIsEditActive(true)
@@ -40,7 +42,7 @@ export const TextUpdaterNode = ({ data, id }: NodeProps) => {
 
   return (
     <div>
-      <Handle type="source" position={Position.Top} id="a" />
+      <Handle type="target" position={Position.Top} id="a" />
       {isEditActive ?
         <form>
           <label htmlFor="prompt">Prompt:
@@ -67,7 +69,7 @@ export const TextUpdaterNode = ({ data, id }: NodeProps) => {
           <p>{getNodeText(answer, 'answer')}</p>
         </div>
       }
-      <Handle type="target" position={Position.Bottom} id="b" />
+      <Handle type="source" position={Position.Bottom} id="b" />
     </div>
   );
 }
