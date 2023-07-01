@@ -25,6 +25,8 @@ export type RFState = {
   onEdgesChange: OnEdgesChange;
   onConnect: OnConnect;
   revertToInitialState: () => void;
+  setNodesUploadData: (nodes: Node[]) => void;
+  setEdgesUploadData: (edges: Edge[]) => void;
   onUpdateEdge: (id: string, text: string) => void;
   onUpdatePrompt: (id: string, text: string) => void;
   onUpdateAnswer: (id: string, text: string) => void;
@@ -107,6 +109,18 @@ const useStore = create<RFState>((set, get) => ({
     set({
       nodes: initialNodes,
       edges: initialEdges,
+    });
+  },
+
+  setNodesUploadData: (nodes: Node[]) => {
+    set({
+      nodes: nodes,
+    });
+  },
+
+  setEdgesUploadData: (edges: Edge[]) => {
+    set({
+      edges: edges,
     });
   },
 
