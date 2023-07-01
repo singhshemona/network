@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import useStore, { RFState } from './store';
 import { shallow } from 'zustand/shallow';
 import { Handle, Position, NodeProps } from 'reactflow';
@@ -8,13 +8,13 @@ export const TextUpdaterNode = ({ data, id }: NodeProps) => {
   const [internalStudyMode, setInternalStudyMode] = useState(false);
 
   const selector = (state: RFState) => ({
-    onUpdatePrompt: state.onUpdatePrompt,
-    onUpdateAnswer: state.onUpdateAnswer,
+    handleUpdatePrompt: state.handleUpdatePrompt,
+    handleUpdateAnswer: state.handleUpdateAnswer,
     studyMode: state.studyMode,
     setCurrentlyStudying: state.setCurrentlyStudying,
   });
 
-  const { onUpdatePrompt, onUpdateAnswer, studyMode, setCurrentlyStudying } = useStore(selector, shallow);
+  const { handleUpdatePrompt, handleUpdateAnswer, studyMode, setCurrentlyStudying } = useStore(selector, shallow);
   const { prompt, answer } = data;
 
   useEffect(() => {
@@ -31,7 +31,7 @@ export const TextUpdaterNode = ({ data, id }: NodeProps) => {
     } else return `click to edit ${type}`
   }
 
-  const onNodeClick = () => {
+  const handleNodeClick = () => {
     if(internalStudyMode) {
       setCurrentlyStudying('node', id)
       setInternalStudyMode(false)
@@ -40,17 +40,22 @@ export const TextUpdaterNode = ({ data, id }: NodeProps) => {
     }
   }
 
+  const handleSubmit = (event: FormEvent) => {
+    event.preventDefault()
+    setIsEditActive(false)
+  }
+
   return (
     <div>
       <Handle type="target" position={Position.Top} id="a" />
       {isEditActive ?
-        <form>
+        <form onSubmit={handleSubmit}>
           <label htmlFor="prompt">Prompt:
             <input 
               id="prompt" 
               name="prompt" 
               value={prompt}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) => onUpdatePrompt(id, event.target.value)} 
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => handleUpdatePrompt(id, event.target.value)} 
               className="nodrag" />
           </label>
           <label htmlFor="answer">Answer:
@@ -58,13 +63,13 @@ export const TextUpdaterNode = ({ data, id }: NodeProps) => {
               id="answer" 
               name="answer" 
               value={answer}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) => onUpdateAnswer(id, event.target.value)} 
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => handleUpdateAnswer(id, event.target.value)} 
               className="nodrag" />
           </label>
-          <button onClick={() => setIsEditActive(false)}>Save</button>
+          <button type="submit">Save</button>
         </form>
         :
-        <div onClick={onNodeClick}>
+        <div onClick={handleNodeClick}>
           <p>{getNodeText(prompt, 'prompt')}</p>
           <p>{getNodeText(answer, 'answer')}</p>
         </div>

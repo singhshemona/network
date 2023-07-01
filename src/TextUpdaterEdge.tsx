@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, FormEvent } from 'react';
 import useStore, { RFState } from './store';
 import { shallow } from 'zustand/shallow';
 import { EdgeProps, EdgeLabelRenderer, BaseEdge, getBezierPath } from 'reactflow';
@@ -38,13 +38,18 @@ export const TextUpdaterEdge = ({
     } else return 'click to edit connection'
   }
 
-  const onEdgeClick = () => {
+  const handleEdgeClick = () => {
     if(internalStudyMode) {
       setCurrentlyStudying('edge', id)
       setInternalStudyMode(false)
     } else {
       setIsEditActive(true)
     }
+  }
+
+  const handleSubmit = (event: FormEvent) => {
+    event.preventDefault()
+    setIsEditActive(false)
   }
 
   const [edgePath, labelX, labelY] = getBezierPath({
@@ -74,7 +79,7 @@ export const TextUpdaterEdge = ({
           }}
         >
           {isEditActive ?
-            <form>
+            <form onSubmit={handleSubmit}>
               <label htmlFor="connection">Connection:
                 <input 
                   id="connection" 
@@ -83,10 +88,10 @@ export const TextUpdaterEdge = ({
                   onChange={(event: React.ChangeEvent<HTMLInputElement>) => onUpdateEdge(id, event.target.value)} 
                   className="nodrag" />
               </label>
-              <button onClick={() => setIsEditActive(false)}>Save</button>
+              <button type="submit" >Save</button>
             </form>
             :
-            <span onClick={onEdgeClick}>{getEdgeText(connection)}</span>
+            <span onClick={handleEdgeClick}>{getEdgeText(connection)}</span>
           }
         </div>
       </EdgeLabelRenderer>

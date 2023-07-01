@@ -28,8 +28,8 @@ export type RFState = {
   setNodesUploadData: (nodes: Node[]) => void;
   setEdgesUploadData: (edges: Edge[]) => void;
   onUpdateEdge: (id: string, text: string) => void;
-  onUpdatePrompt: (id: string, text: string) => void;
-  onUpdateAnswer: (id: string, text: string) => void;
+  handleUpdatePrompt: (id: string, text: string) => void;
+  handleUpdateAnswer: (id: string, text: string) => void;
   addNewNode: (position: {x: number, y: number}) => void;
   setStudyMode: (boolean: boolean) => void;
   setCurrentlyStudying: (type: string, id: string) => void;
@@ -83,7 +83,7 @@ const useStore = create<RFState>((set, get) => ({
     });
   },
 
-  onUpdatePrompt: (id: string, text: string) => {
+  handleUpdatePrompt: (id: string, text: string) => {
     set({
       nodes: get().nodes.map((node) => {
         if (node.id === id) {
@@ -94,7 +94,7 @@ const useStore = create<RFState>((set, get) => ({
     });
   },
 
-  onUpdateAnswer: (id: string, text: string) => {
+  handleUpdateAnswer: (id: string, text: string) => {
     set({
       nodes: get().nodes.map((node) => {
         if (node.id === id) {
