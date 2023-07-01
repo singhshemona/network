@@ -40,16 +40,11 @@ export const TextUpdaterNode = ({ data, id }: NodeProps) => {
     }
   }
 
-  const handleSubmit = (event: FormEvent) => {
-    event.preventDefault()
-    setIsEditActive(false)
-  }
-
   return (
     <div>
       <Handle type="target" position={Position.Top} id="a" />
       {isEditActive ?
-        <form onSubmit={handleSubmit}>
+        <form>
           <label htmlFor="prompt">Prompt:
             <input 
               id="prompt" 
@@ -66,7 +61,7 @@ export const TextUpdaterNode = ({ data, id }: NodeProps) => {
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => handleUpdateAnswer(id, event.target.value)} 
               className="nodrag" />
           </label>
-          <button type="submit">Save</button>
+          <button type="button" onClick={() => setIsEditActive(false)}>Save</button>
         </form>
         :
         <div onClick={handleNodeClick}>

@@ -47,11 +47,6 @@ export const TextUpdaterEdge = ({
     }
   }
 
-  const handleSubmit = (event: FormEvent) => {
-    event.preventDefault()
-    setIsEditActive(false)
-  }
-
   const [edgePath, labelX, labelY] = getBezierPath({
     sourceX,
     sourceY,
@@ -79,7 +74,7 @@ export const TextUpdaterEdge = ({
           }}
         >
           {isEditActive ?
-            <form onSubmit={handleSubmit}>
+            <form>
               <label htmlFor="connection">Connection:
                 <input 
                   id="connection" 
@@ -88,7 +83,7 @@ export const TextUpdaterEdge = ({
                   onChange={(event: React.ChangeEvent<HTMLInputElement>) => onUpdateEdge(id, event.target.value)} 
                   className="nodrag" />
               </label>
-              <button type="submit" >Save</button>
+              <button type="button" onClick={() => setIsEditActive(false)}>Save</button>
             </form>
             :
             <span onClick={handleEdgeClick}>{getEdgeText(connection)}</span>
