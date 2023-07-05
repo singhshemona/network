@@ -1,4 +1,4 @@
-import React, { useState, useEffect, FormEvent } from 'react';
+import React, { useState, useEffect } from 'react';
 import useStore, { RFState } from './store';
 import { shallow } from 'zustand/shallow';
 import { EdgeProps, EdgeLabelRenderer, BaseEdge, getBezierPath } from 'reactflow';

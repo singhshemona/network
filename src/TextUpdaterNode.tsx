@@ -1,7 +1,8 @@
-import React, { FormEvent, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import useStore, { RFState } from './store';
 import { shallow } from 'zustand/shallow';
 import { Handle, Position, NodeProps } from 'reactflow';
+import { calculateColor } from './utils/calculateColor';
 
 export const TextUpdaterNode = ({ data, id }: NodeProps) => {
   const [isEditActive, setIsEditActive] = useState(false);
@@ -15,7 +16,7 @@ export const TextUpdaterNode = ({ data, id }: NodeProps) => {
   });
 
   const { handleUpdatePrompt, handleUpdateAnswer, studyMode, setCurrentlyStudying } = useStore(selector, shallow);
-  const { prompt, answer } = data;
+  const { prompt, answer, grade } = data;
 
   useEffect(() => {
     setInternalStudyMode(studyMode ? true : false)
@@ -41,7 +42,7 @@ export const TextUpdaterNode = ({ data, id }: NodeProps) => {
   }
 
   return (
-    <div>
+    <div style={{ borderColor: calculateColor(grade.efactor) }}>
       <Handle type="target" position={Position.Top} id="a" />
       {isEditActive ?
         <form>
