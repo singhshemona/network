@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { NodeColor } from '../../types/types';
+import { NodeColor } from '../../types/shared-types';
 
 type NodeContainerProps = { 
-  colors: NodeColor
+  colors: NodeColor;
 }
 
 export const NodeContainer = styled.div<NodeContainerProps>`

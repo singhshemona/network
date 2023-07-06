@@ -1,5 +1,5 @@
 import { theme } from "../styles/Theme"
-import { NodeColor } from "../types/types"
+import { NodeColor } from "../types/shared-types"
 
 
 export const calculateColor = (efactor: number): NodeColor => {
@@ -12,6 +12,11 @@ export const calculateColor = (efactor: number): NodeColor => {
     return {
       dark: theme.colors.darkOrange, 
       light: theme.colors.lightOrange
+    }
+  } else if(efactor === 2.5) {
+    return {
+      dark: theme.colors.darkNeutral, 
+      light: theme.colors.lightNeutral
     }
   } else if(efactor < 3) {
     return {
