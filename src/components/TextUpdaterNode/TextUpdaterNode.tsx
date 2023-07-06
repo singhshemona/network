@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import useStore, { RFState } from './store';
+import useStore, { RFState } from '../../providers/store';
 import { shallow } from 'zustand/shallow';
 import { Handle, Position, NodeProps } from 'reactflow';
-import { calculateColor } from './utils/calculateColor';
+import { calculateColor } from '../../utils/calculateColor';
+import { NodeContainer, Prompt } from './TextUpdaterNodeStyles';
 
 export const TextUpdaterNode = ({ data, id }: NodeProps) => {
   const [isEditActive, setIsEditActive] = useState(false);
@@ -42,7 +43,7 @@ export const TextUpdaterNode = ({ data, id }: NodeProps) => {
   }
 
   return (
-    <div style={{ borderColor: calculateColor(grade.efactor) }}>
+    <NodeContainer colors={calculateColor(grade.efactor)}>
       <Handle type="target" position={Position.Top} id="a" />
       {isEditActive ?
         <form>
@@ -66,11 +67,11 @@ export const TextUpdaterNode = ({ data, id }: NodeProps) => {
         </form>
         :
         <div onClick={handleNodeClick}>
-          <p>{getNodeText(prompt, 'prompt')}</p>
+          <Prompt>{getNodeText(prompt, 'prompt')}</Prompt>
           <p>{getNodeText(answer, 'answer')}</p>
         </div>
       }
       <Handle type="source" position={Position.Bottom} id="b" />
-    </div>
+    </NodeContainer>
   );
 }

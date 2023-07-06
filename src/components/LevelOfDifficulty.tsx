@@ -1,5 +1,5 @@
 import React from 'react';
-import useStore, { RFState } from './store';
+import useStore, { RFState } from '../providers/store';
 import { shallow } from 'zustand/shallow';
 import { SuperMemoGrade } from 'supermemo';
 

@@ -1,8 +1,8 @@
 import React, { useRef, useMemo } from 'react';
-import { TextUpdaterNode } from './TextUpdaterNode';
+import { TextUpdaterNode } from './TextUpdaterNode/TextUpdaterNode';
 import { TextUpdaterEdge } from './TextUpdaterEdge';
 import { shallow } from 'zustand/shallow';
-import useStore, { RFState } from './store';
+import useStore, { RFState } from '../providers/store';
 import ReactFlow, { MiniMap, Background, BackgroundVariant, useReactFlow } from 'reactflow';
 import 'reactflow/dist/style.css';
 
