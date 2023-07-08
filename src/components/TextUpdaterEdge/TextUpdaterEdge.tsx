@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import useStore, { RFState } from '../providers/store';
+import useStore, { RFState } from '../../providers/store';
 import { shallow } from 'zustand/shallow';
 import { EdgeProps, EdgeLabelRenderer, BaseEdge, getBezierPath } from 'reactflow';
+import { calculateColor } from '../../utils/calculateColor';
+import { EdgeContainer } from './TextUpdaterEdgeStyles';
 
 export const TextUpdaterEdge = ({ 
   data, 
@@ -24,7 +26,7 @@ export const TextUpdaterEdge = ({
   });
 
   const { onUpdateEdge, studyMode, setCurrentlyStudying } = useStore(selector, shallow);
-  const { connection } = data;
+  const { connection, grade } = data;
 
   useEffect(() => {
     setInternalStudyMode(studyMode ? true : false)
@@ -60,19 +62,7 @@ export const TextUpdaterEdge = ({
     <>
       <BaseEdge id={id} markerEnd={markerEnd} path={edgePath} />
       <EdgeLabelRenderer>
-        <div
-          style={{
-            position: 'absolute',
-            transform: `translate(-50%, -50%) translate(${labelX}px,${labelY}px)`,
-            background: '#ffcc00',
-            padding: 5,
-            borderRadius: 5,
-            fontSize: 12,
-            fontWeight: 700,
-            margin: 0,
-            pointerEvents: 'all',
-          }}
-        >
+        <EdgeContainer colors={calculateColor(grade.efactor)} labelX={labelX} labelY={labelY}>
           {isEditActive ?
             <form>
               <label htmlFor="connection">Connection:
@@ -88,7 +78,7 @@ export const TextUpdaterEdge = ({
             :
             <span onClick={handleEdgeClick}>{getEdgeText(connection)}</span>
           }
-        </div>
+        </EdgeContainer>
       </EdgeLabelRenderer>
     </>
   );
