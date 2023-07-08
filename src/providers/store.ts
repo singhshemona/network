@@ -20,6 +20,8 @@ export type RFState = {
   nodes: Node[];
   edges: Edge[];
   studyMode: boolean;
+  networkName: string;
+  setNetworkName: (networkName: string) => void;
   currentlyStudying: {type: string | undefined, id: string | undefined};
   onNodesChange: OnNodesChange;
   onEdgesChange: OnEdgesChange;
@@ -41,6 +43,14 @@ const useStore = create<RFState>((set, get) => ({
   nodes: initialNodes,
   edges: initialEdges,
   studyMode: false,
+  networkName: 'Network Name (click to edit)',
+  
+  setNetworkName: (networkName: string) => {
+    set({
+      networkName: networkName,
+    });
+  },
+
   currentlyStudying: {type: undefined, id: undefined},
 
   onNodesChange: (changes: NodeChange[]) => {
