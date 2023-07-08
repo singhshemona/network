@@ -13,4 +13,5 @@ export const AppContainer = styled.div`
 export const ReactFlowContainer = styled.div`
   width: 100vw;
   height: 100vh;
+  border-top: 1px solid ${props => props.theme.colors.lightGray}
 `;

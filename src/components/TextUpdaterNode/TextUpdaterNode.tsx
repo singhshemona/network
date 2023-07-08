@@ -3,7 +3,7 @@ import useStore, { RFState } from '../../providers/store';
 import { shallow } from 'zustand/shallow';
 import { Handle, Position, NodeProps } from 'reactflow';
 import { calculateColor } from '../../utils/calculateColor';
-import { NodeContainer, Prompt } from './TextUpdaterNodeStyles';
+import { NodeContainer, Prompt, Answer } from './TextUpdaterNodeStyles';
 
 export const TextUpdaterNode = ({ data, id }: NodeProps) => {
   const [isEditActive, setIsEditActive] = useState(false);
@@ -68,7 +68,7 @@ export const TextUpdaterNode = ({ data, id }: NodeProps) => {
         :
         <div onClick={handleNodeClick}>
           <Prompt>{getNodeText(prompt, 'prompt')}</Prompt>
-          <p>{getNodeText(answer, 'answer')}</p>
+          <Answer>{getNodeText(answer, 'answer')}</Answer>
         </div>
       }
       <Handle type="source" position={Position.Bottom} id="b" />

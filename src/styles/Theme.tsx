@@ -1,8 +1,8 @@
 export const theme = {
   colors: {
     cream: '#FEFCF6',
-    lightGray: '#7B7871',
     darkGray: '#3A3A3A',
+    lightGray: '#7B7871',
     darkRed: '#F64438',
     lightRed: '#FDE0DA',
     darkOrange: '#EF942A',
