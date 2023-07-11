@@ -22,7 +22,7 @@ export const ReactFlowContainer = styled.div`
 `;
 
 export const NodeAndEdgeContainer = styled.div<NodeAndEdgeContainerProps>`
-  border-radius: 4px;
+  border-radius: ${props => props.theme.borderRadius.default};
   padding: 12px;
   color: ${props => props.theme.colors.darkGray};
   border: ${({colors}) => `1px solid ${colors.dark}`};

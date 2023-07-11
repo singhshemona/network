@@ -3,6 +3,7 @@ import { shallow } from 'zustand/shallow';
 import useStore, { RFState } from '../../providers/store';
 import { LevelOfDifficulty } from '../../components/LevelOfDifficulty';
 import { HeaderContainer, Menu, Title, NetworkName } from './HeaderStyles';
+import { Dropdown } from '../Dropdown/Dropdown';
 
 export const Header = () => {
   const [editNetworkName, setEditNetworkName] = useState(false);
@@ -59,37 +60,41 @@ export const Header = () => {
     <HeaderContainer>
       <Menu>
         <li><Title>Adjacent</Title></li>
-        <li>About</li>
-        <li>Examples</li>
+        <Dropdown trigger="About" contents={<span>testing this out!!</span>} />
+        <Dropdown trigger="Examples" contents={<ul><li>Example 1</li><li>Example 2</li></ul>} />
         <li><button onClick={() => createNewNetwork()}>New Network</button></li>
-        <li>
-          <a 
-            href={`data:text/json;charset=utf-8,${encodeURIComponent(
-              JSON.stringify(nodes)
-            )}`}
-            download="nodes-data.json"
-          >
-            Download Nodes Data
-          </a>
-        </li>
-        <li>
-          <a 
-            href={`data:text/json;charset=utf-8,${encodeURIComponent(
-              JSON.stringify(edges)
-            )}`}
-            download="edges-data.json"
-          >
-            Download Edges Data
-          </a>
-        </li>
-        <li>
-          <label htmlFor="nodes data">Upload Nodes Data</label>
-          <input id="nodes data" type="file" onChange={(event) => handleDataUpload('nodes', event)} />
-        </li>
-        <li>
-          <label htmlFor="edges data">Upload Edges Data</label>
-          <input id="nodes data" type="file" onChange={(event) => handleDataUpload('edges', event)} />
-        </li>
+        <Dropdown trigger="Load & Download Data" contents={
+          <ul>
+            <li>
+              <a 
+                href={`data:text/json;charset=utf-8,${encodeURIComponent(
+                  JSON.stringify(nodes)
+                )}`}
+                download="nodes-data.json"
+              >
+              Download Nodes Data
+              </a>
+            </li>
+            <li>
+              <a 
+                href={`data:text/json;charset=utf-8,${encodeURIComponent(
+                  JSON.stringify(edges)
+                )}`}
+                download="edges-data.json"
+              >
+                Download Edges Data
+              </a>
+            </li>
+            <li>
+              <label htmlFor="nodes data">Upload Nodes Data</label>
+              <input id="nodes data" type="file" onChange={(event) => handleDataUpload('nodes', event)} />
+            </li>
+            <li>
+              <label htmlFor="edges data">Upload Edges Data</label>
+              <input id="nodes data" type="file" onChange={(event) => handleDataUpload('edges', event)} />
+            </li>
+          </ul>
+        } />
         <li>Study Mode: <button onClick={() => setStudyMode(!studyMode)}>{studyMode ? 'ON' : 'OFF'}</button></li>
       </Menu>
       {studyMode && <LevelOfDifficulty />}

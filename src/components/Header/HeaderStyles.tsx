@@ -15,6 +15,8 @@ export const Menu = styled.menu`
 
 export const Title = styled.h1`
   font-weight: ${props => props.theme.fontWeight.bold};
+  font-size: 24px;
+  margin: 0;
 `;
 
 export const NetworkName = styled.h2`

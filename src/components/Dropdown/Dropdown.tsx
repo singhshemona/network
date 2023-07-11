@@ -1,21 +1,22 @@
 import React, { useState } from 'react';
+import { DropdownContainer, DropdownContents, Trigger } from './DropdownStyles';
 
 type DropdownProps = {
   trigger: string;
-  children: JSX.Element;
+  contents: JSX.Element;
 }
 
-export const Dropdown = ({ trigger, children }: DropdownProps) => {
+export const Dropdown = ({ trigger, contents }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <>
-      <button onClick={(prevState) => setIsOpen(!prevState)}>{trigger} {isOpen ? '+' : '-'}</button>
+    <DropdownContainer>
+      <Trigger onClick={() => setIsOpen(prevState => !prevState)}>{trigger} {isOpen ? '-' : '+'} </Trigger>
       {isOpen &&
-        <div>
-          {children}
-        </div>
+        <DropdownContents>
+          {contents}
+        </DropdownContents>
       }
-    </>
+    </DropdownContainer>
   );
 }

@@ -1,4 +1,7 @@
 export const theme = {
+  borderRadius: {
+    default: '4px',
+  },
   colors: {
     cream: '#FEFCF6',
     darkGray: '#3A3A3A',
