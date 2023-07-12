@@ -43,7 +43,7 @@ const useStore = create<RFState>((set, get) => ({
   nodes: initialNodes,
   edges: initialEdges,
   studyMode: false,
-  networkName: 'Network Name (click to edit)',
+  networkName: 'Network Name',
   
   setNetworkName: (networkName: string) => {
     set({

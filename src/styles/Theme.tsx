@@ -6,6 +6,7 @@ export const theme = {
     cream: '#FEFCF6',
     darkGray: '#3A3A3A',
     lightGray: '#7B7871',
+    hoverGray: '#EBEBEB',
     darkRed: '#F64438',
     lightRed: '#FDE0DA',
     darkOrange: '#EF942A',

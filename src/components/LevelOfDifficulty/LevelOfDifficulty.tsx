@@ -1,7 +1,9 @@
 import React from 'react';
-import useStore, { RFState } from '../providers/store';
+import useStore, { RFState } from '../../providers/store';
 import { shallow } from 'zustand/shallow';
 import { SuperMemoGrade } from 'supermemo';
+import { Button } from '../../styles/GeneralStyles';
+import { OptionsContainer } from './LevelOfDifficultyStyles';
 
 export const LevelOfDifficulty = () => {
   const selector = (state: RFState) => ({
@@ -20,14 +22,14 @@ export const LevelOfDifficulty = () => {
 
   return (
     <>
-      <ul>
-        <li><button onClick={() => setGrade(0)}>0</button></li>
-        <li><button onClick={() => setGrade(1)}>1</button></li>
-        <li><button onClick={() => setGrade(2)}>2</button></li>
-        <li><button onClick={() => setGrade(3)}>3</button></li>
-        <li><button onClick={() => setGrade(4)}>4</button></li>
-        <li><button onClick={() => setGrade(5)}>5</button></li>
-      </ul>
+      <OptionsContainer>
+        <li><Button onClick={() => setGrade(0)}>0</Button></li>
+        <li><Button onClick={() => setGrade(1)}>1</Button></li>
+        <li><Button onClick={() => setGrade(2)}>2</Button></li>
+        <li><Button onClick={() => setGrade(3)}>3</Button></li>
+        <li><Button onClick={() => setGrade(4)}>4</Button></li>
+        <li><Button onClick={() => setGrade(5)}>5</Button></li>
+      </OptionsContainer>
       <p>Click on "about" to understand the scoring.</p>
     </>
   );

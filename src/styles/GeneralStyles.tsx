@@ -18,7 +18,6 @@ export const AppContainer = styled.div`
 export const ReactFlowContainer = styled.div`
   width: 100vw;
   height: 100vh;
-  border-top: 1px solid ${props => props.theme.colors.lightGray}
 `;
 
 export const NodeAndEdgeContainer = styled.div<NodeAndEdgeContainerProps>`
@@ -27,4 +26,17 @@ export const NodeAndEdgeContainer = styled.div<NodeAndEdgeContainerProps>`
   color: ${props => props.theme.colors.darkGray};
   border: ${({colors}) => `1px solid ${colors.dark}`};
   background-color: ${({colors}) => colors.light};
+`;
+
+export const Button = styled.button`
+  color: ${props => props.theme.colors.lightGray};
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: ${props => props.theme.borderRadius.default};
+  background: ${props => props.theme.colors.cream};
+  border: 1px solid ${props => props.theme.colors.lightGray};
+  &:hover {
+    background: ${props => props.theme.colors.hoverGray};
+    transition: ease .3s;
+  }
 `;
