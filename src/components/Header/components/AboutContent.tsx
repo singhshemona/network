@@ -12,8 +12,9 @@ export const AboutContent = () => {
         <li>For maximum learning efficiency, ensure your prompts and answers <a href="https://andymatuschak.org/prompts/">follow these guidelines</a>.</li>
         <li>Connect nodes that you think relate in some way, then describe that connection in their shared edge's text.</li>
         <li>To study your cards, click the "On" button next to "Study mode". Try to answer one of the prompts, then rank from 0 (most difficult) to 5 (easiest) how
-          confident you felt answering once you reveal the answer by clicking the card. This will set the color of the card as well.
+          confident you felt answering once you reveal the answer by clicking the card. 
         </li>
+        <li>Turn study mode off to reveal the strength of your knowledge through color.</li>
       </ol>
       <h3>Helpful tips:</h3>
       <ul>

@@ -2,7 +2,8 @@ import styled from 'styled-components';
 import { NodeAndEdgeContainer } from '../../styles/GeneralStyles';
 
 export const NodeContainer = styled(NodeAndEdgeContainer)`
-  max-width: 280px;
+  max-width: 350px;
+  min-width: 280px;
 `;
 
 export const Prompt = styled.p`

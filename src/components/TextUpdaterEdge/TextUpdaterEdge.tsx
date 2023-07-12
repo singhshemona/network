@@ -4,7 +4,7 @@ import { shallow } from 'zustand/shallow';
 import { EdgeProps, EdgeLabelRenderer, BaseEdge, getBezierPath } from 'reactflow';
 import { calculateColor } from '../../utils/calculateColor';
 import { EdgeContainer } from './TextUpdaterEdgeStyles';
-import { Button, Input } from '../../styles/GeneralStyles';
+import { Button, Input, Textarea } from '../../styles/GeneralStyles';
 
 export const TextUpdaterEdge = ({ 
   data, 
@@ -67,12 +67,11 @@ export const TextUpdaterEdge = ({
           {isEditActive ?
             <form>
               <label htmlFor="connection">Connection:
-                <Input 
-                  type="text"
+                <Textarea
                   id="connection" 
                   name="connection" 
                   value={connection}
-                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => onUpdateEdge(id, event.target.value)} 
+                  onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => onUpdateEdge(id, event.target.value)} 
                   className="nodrag" />
               </label>
               <Button type="button" onClick={() => setIsEditActive(false)}>Save</Button>

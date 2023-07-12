@@ -7,7 +7,7 @@ type EdgeContainerProps = {
 }
 
 export const EdgeContainer = styled(NodeAndEdgeContainer)<EdgeContainerProps>`
-  max-width: 100px;
+  max-width: 160px;
   position: absolute;
   transform: ${({labelX, labelY}) => `translate(-50%, -50%) translate(${labelX}px,${labelY}px)`};
   pointer-events: all;
