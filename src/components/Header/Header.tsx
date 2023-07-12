@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { shallow } from 'zustand/shallow';
 import useStore, { RFState } from '../../providers/store';
 import { LevelOfDifficulty } from '../LevelOfDifficulty/LevelOfDifficulty';
-import { HeaderContainer, Menu, Title, NetworkName } from './HeaderStyles';
+import { HeaderContainer, Menu, Title, NetworkName, HeaderSecondLayerContainer } from './HeaderStyles';
 import { Dropdown } from '../Dropdown/Dropdown';
 import { Button } from '../../styles/GeneralStyles';
 import { AboutContent } from './components/AboutContent';
@@ -46,20 +46,20 @@ export const Header = () => {
         <Dropdown trigger="Examples" contents={<ul><li>Example 1</li><li>Example 2</li></ul>} />
         <li><Button onClick={() => createNewNetwork()}>New Network</Button></li>
         <Dropdown trigger="Load & Download Data" contents={<DownloadUploadContent />} />
-        <li>Study Mode: <Button onClick={() => setStudyMode(!studyMode)}>{studyMode ? 'ON' : 'OFF'}</Button></li>
       </Menu>
-      {studyMode && <LevelOfDifficulty />}
-      {editNetworkName ?
-        <>
-          <li>
+      <HeaderSecondLayerContainer>
+        {editNetworkName ?
+          <>
             <label htmlFor="network name">Change Network Name</label>
             <input value={networkName} id="network name" type="text" onChange={(event) => setNetworkName(event.target.value)} />
-          </li>
-          <Button onClick={() => setEditNetworkName(false)}>Save</Button>
-        </>
-        :
-        <NetworkName onClick={() => setEditNetworkName(true)}>{networkName}</NetworkName>
-      }
+            <Button onClick={() => setEditNetworkName(false)}>Save</Button>
+          </>
+          :
+          <NetworkName onClick={() => setEditNetworkName(true)}>{networkName}</NetworkName>
+        }
+        <span>Study Mode: <Button onClick={() => setStudyMode(!studyMode)}>{studyMode ? 'ON' : 'OFF'}</Button></span>
+        {studyMode && <LevelOfDifficulty />}
+      </HeaderSecondLayerContainer>
     </HeaderContainer>
   );
 }

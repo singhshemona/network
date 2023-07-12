@@ -21,16 +21,13 @@ export const LevelOfDifficulty = () => {
   }
 
   return (
-    <>
-      <OptionsContainer>
-        <li><Button onClick={() => setGrade(0)}>0</Button></li>
-        <li><Button onClick={() => setGrade(1)}>1</Button></li>
-        <li><Button onClick={() => setGrade(2)}>2</Button></li>
-        <li><Button onClick={() => setGrade(3)}>3</Button></li>
-        <li><Button onClick={() => setGrade(4)}>4</Button></li>
-        <li><Button onClick={() => setGrade(5)}>5</Button></li>
-      </OptionsContainer>
-      <p>Click on "about" to understand the scoring.</p>
-    </>
+    <OptionsContainer>
+      <li><Button onClick={() => setGrade(0)}>0</Button></li>
+      <li><Button onClick={() => setGrade(1)}>1</Button></li>
+      <li><Button onClick={() => setGrade(2)}>2</Button></li>
+      <li><Button onClick={() => setGrade(3)}>3</Button></li>
+      <li><Button onClick={() => setGrade(4)}>4</Button></li>
+      <li><Button onClick={() => setGrade(5)}>5</Button></li>
+    </OptionsContainer>
   );
 }
