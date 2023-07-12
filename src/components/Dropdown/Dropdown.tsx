@@ -11,7 +11,7 @@ export const Dropdown = ({ trigger, contents }: DropdownProps) => {
 
   return (
     <DropdownContainer>
-      <Trigger onClick={() => setIsOpen(prevState => !prevState)}>{trigger} {isOpen ? '-' : '+'} </Trigger>
+      <Trigger isOpen={isOpen} onClick={() => setIsOpen(prevState => !prevState)}>{trigger} {isOpen ? '-' : '+'} </Trigger>
       {isOpen &&
         <DropdownContents>
           {contents}

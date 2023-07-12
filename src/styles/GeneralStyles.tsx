@@ -40,3 +40,13 @@ export const Button = styled.button`
     transition: ease .3s;
   }
 `;
+
+export const Input = styled.input`
+  padding: 6px;
+  border-radius: ${props => props.theme.borderRadius.default};
+  border: 1px solid ${props => props.theme.colors.lightGray};
+`;
+
+export const Label = styled.label`
+  font-weight: ${props => props.theme.fontWeight.bold};
+`;

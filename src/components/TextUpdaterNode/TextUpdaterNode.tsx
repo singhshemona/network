@@ -4,6 +4,7 @@ import { shallow } from 'zustand/shallow';
 import { Handle, Position, NodeProps } from 'reactflow';
 import { calculateColor } from '../../utils/calculateColor';
 import { NodeContainer, Prompt, Answer } from './TextUpdaterNodeStyles';
+import { Button, Input } from '../../styles/GeneralStyles';
 
 export const TextUpdaterNode = ({ data, id }: NodeProps) => {
   const [isEditActive, setIsEditActive] = useState(false);
@@ -47,23 +48,23 @@ export const TextUpdaterNode = ({ data, id }: NodeProps) => {
       <Handle type="target" position={Position.Top} id="a" />
       {isEditActive ?
         <form>
-          <label htmlFor="prompt">Prompt:
-            <input 
+          <label htmlFor="prompt">Prompt:</label>
+          <Input 
+              type="text"
               id="prompt" 
               name="prompt" 
               value={prompt}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => handleUpdatePrompt(id, event.target.value)} 
               className="nodrag" />
-          </label>
-          <label htmlFor="answer">Answer:
-            <input 
+          <label htmlFor="answer">Answer:</label>
+          <Input 
+              type="text"
               id="answer" 
               name="answer" 
               value={answer}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => handleUpdateAnswer(id, event.target.value)} 
               className="nodrag" />
-          </label>
-          <button type="button" onClick={() => setIsEditActive(false)}>Save</button>
+          <Button type="button" onClick={() => setIsEditActive(false)}>Save</Button>
         </form>
         :
         <div onClick={handleNodeClick}>

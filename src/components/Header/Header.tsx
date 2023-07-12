@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent } from 'react';
 import { shallow } from 'zustand/shallow';
 import useStore, { RFState } from '../../providers/store';
 import { LevelOfDifficulty } from '../LevelOfDifficulty/LevelOfDifficulty';
 import { HeaderContainer, Menu, Title, NetworkName, HeaderSecondLayerContainer } from './HeaderStyles';
 import { Dropdown } from '../Dropdown/Dropdown';
-import { Button } from '../../styles/GeneralStyles';
+import { Button, Input } from '../../styles/GeneralStyles';
 import { AboutContent } from './components/AboutContent';
 import { DownloadUploadContent } from './components/DownloadUploadContent';
 
@@ -51,7 +51,7 @@ export const Header = () => {
         {editNetworkName ?
           <>
             <label htmlFor="network name">Change Network Name</label>
-            <input value={networkName} id="network name" type="text" onChange={(event) => setNetworkName(event.target.value)} />
+            <Input value={networkName} id="network name" type="text" onChange={(event: ChangeEvent<HTMLInputElement>) => setNetworkName(event.target.value)} />
             <Button onClick={() => setEditNetworkName(false)}>Save</Button>
           </>
           :
