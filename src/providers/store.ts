@@ -19,6 +19,7 @@ import { SuperMemoGrade } from 'supermemo';
 export type RFState = {
   nodes: Node[];
   edges: Edge[];
+  setNodesAndEdges: (nodes: Node[], edges: Edge[]) => void;
   studyMode: boolean;
   networkName: string;
   setNetworkName: (networkName: string) => void;
@@ -26,7 +27,6 @@ export type RFState = {
   onNodesChange: OnNodesChange;
   onEdgesChange: OnEdgesChange;
   onConnect: OnConnect;
-  revertToInitialState: () => void;
   setNodesUploadData: (nodes: Node[]) => void;
   setEdgesUploadData: (edges: Edge[]) => void;
   onUpdateEdge: (id: string, text: string) => void;
@@ -44,6 +44,13 @@ const useStore = create<RFState>((set, get) => ({
   edges: initialEdges,
   studyMode: false,
   networkName: 'Network Name',
+
+  setNodesAndEdges: (nodes: Node[], edges: Edge[]) => {
+    set({
+      nodes: nodes,
+      edges: edges,
+    });
+  },
   
   setNetworkName: (networkName: string) => {
     set({
@@ -112,13 +119,6 @@ const useStore = create<RFState>((set, get) => ({
         }
         return node;
       }),
-    });
-  },
-
-  revertToInitialState: () => {
-    set({
-      nodes: initialNodes,
-      edges: initialEdges,
     });
   },
 

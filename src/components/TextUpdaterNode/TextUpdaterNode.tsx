@@ -28,10 +28,10 @@ export const TextUpdaterNode = ({ data, id }: NodeProps) => {
     if(type === 'prompt' && data) {
       return data
     } else if(internalStudyMode && data) {
-      return 'click to reveal answer'
+      return 'Click to reveal answer'
     } else if(data) {
       return data
-    } else return `click to edit ${type}`
+    } else return `Click to edit ${type}`
   }
 
   const handleNodeClick = () => {

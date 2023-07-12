@@ -35,10 +35,10 @@ export const TextUpdaterEdge = ({
 
   const getEdgeText = (connection: string): string => {
     if(internalStudyMode && connection) {
-      return 'click to reveal connection'
+      return 'Click to reveal connection'
     } else if(connection) {
       return connection
-    } else return 'click to edit connection'
+    } else return 'Click to edit connection'
   }
 
   const handleEdgeClick = () => {

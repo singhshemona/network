@@ -12,12 +12,14 @@ export const AboutContent = () => {
         <li>For maximum learning efficiency, ensure your prompts and answers <a href="https://andymatuschak.org/prompts/">follow these guidelines</a>.</li>
         <li>Connect nodes that you think relate in some way, then describe that connection in their shared edge's text.</li>
         <li>To study your cards, click the "On" button next to "Study mode". Try to answer one of the prompts, then rank from 0 (most difficult) to 5 (easiest) how
-          confident you felt answering once you reveal the answer by clicking the card. 
+          confident you felt answering once you reveal the answer by clicking the card. It's suggested to do your nodes first, then the edges connecting
+          those nodes, but you can study as you feel.
         </li>
         <li>Turn study mode off to reveal the strength of your knowledge through color.</li>
       </ol>
       <h3>Helpful tips:</h3>
       <ul>
+        <li>Load up an example Network from the "Examples" dropdown to see how it all works.</li>
         <li>To delete a node or edge, click on it and hit your keyboard's delete button.</li>
         <li>To change the name of the Network, click on the name, update the name in the textbox and click "save".</li>
         <li>This app does not yet have authorization, so you need to save your network data on 
