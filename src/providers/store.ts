@@ -1,6 +1,6 @@
 import { create } from 'zustand';
-import { initialNodes, initialEdges } from '../data/data';
-import { practice } from '../utils/calculateGrade';
+import { initialNodes, initialEdges } from '../data/initial';
+import { practice } from '../utils/calculate-grade';
 import {
   Connection,
   Edge,

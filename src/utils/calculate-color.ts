@@ -1,4 +1,4 @@
-import { theme } from "../styles/Theme"
+import { theme } from "../styles/theme"
 import { NodeColor } from "../types/shared-types"
 
 

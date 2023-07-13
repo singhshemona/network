@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'zustand/shallow';
 import useStore, { RFState } from '../../../providers/store';
-import { writingWellNodes, writingWellEdges } from '../../../data/data';
+import { writingWellNodes, writingWellEdges } from '../../../data/writing-well';
 import { Button } from '../../../styles/GeneralStyles';
 
 export const ExamplesContent = () => {

@@ -7,7 +7,7 @@ import { Dropdown } from '../Dropdown/Dropdown';
 import { Button, Input } from '../../styles/GeneralStyles';
 import { AboutContent } from './components/AboutContent';
 import { DownloadUploadContent } from './components/DownloadUploadContent';
-import { initialEdges, initialNodes } from '../../data/data';
+import { initialEdges, initialNodes } from '../../data/initial';
 import { ExamplesContent } from './components/ExamplesContent';
 
 export const Header = () => {
@@ -46,8 +46,8 @@ export const Header = () => {
         <li><Title>Adjacent</Title></li>
         <Dropdown trigger="About" contents={<AboutContent />} />
         <Dropdown trigger="Examples" contents={<ExamplesContent />} />
-        <li><Button onClick={() => createNewNetwork()}>New Network</Button></li>
         <Dropdown trigger="Load & Download Data" contents={<DownloadUploadContent />} />
+        <li><Button onClick={() => createNewNetwork()}>New Network</Button></li>
       </Menu>
       <HeaderSecondLayerContainer>
         {editNetworkName ?

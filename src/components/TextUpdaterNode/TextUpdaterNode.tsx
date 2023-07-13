@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import useStore, { RFState } from '../../providers/store';
 import { shallow } from 'zustand/shallow';
 import { Handle, Position, NodeProps } from 'reactflow';
-import { calculateColor } from '../../utils/calculateColor';
+import { calculateColor } from '../../utils/calculate-color';
 import { NodeContainer, Prompt, Answer } from './TextUpdaterNodeStyles';
 import { Button, Input, Label, Textarea } from '../../styles/GeneralStyles';
 
