@@ -56,6 +56,10 @@ export const Network = () => {
       onConnect={onConnect}
       onClick={getNewNodePosition}
       ref={reactFlowRef}
+
+      // TODO: look into these props
+      // fitView
+      // connectOnClick
     >
       <Background variant={BackgroundVariant.Dots} />
       {nodes.length > 10 && <MiniMap />}

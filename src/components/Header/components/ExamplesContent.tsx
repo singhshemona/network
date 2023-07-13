@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'zustand/shallow';
 import useStore, { RFState } from '../../../providers/store';
 import { writingWellNodes, writingWellEdges } from '../../../data/writing-well';
+import { designThinkingNodes, designThinkingEdges } from '../../../data/design-thinking';
 import { Button } from '../../../styles/GeneralStyles';
 
 export const ExamplesContent = () => {
@@ -14,7 +15,7 @@ export const ExamplesContent = () => {
   return (
     <ul>
       <li><Button onClick={() => setNodesAndEdges(writingWellNodes, writingWellEdges)}>Writing Well</Button></li>
-      <li>Example 2</li>
+      <li><Button onClick={() => setNodesAndEdges(designThinkingNodes, designThinkingEdges)}>Design Thinking</Button></li>
     </ul>
   );
 }

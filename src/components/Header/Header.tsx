@@ -44,9 +44,9 @@ export const Header = () => {
     <HeaderContainer>
       <Menu>
         <li><Title>Adjacent</Title></li>
-        <Dropdown trigger="About" contents={<AboutContent />} />
-        <Dropdown trigger="Examples" contents={<ExamplesContent />} />
-        <Dropdown trigger="Load & Download Data" contents={<DownloadUploadContent />} />
+        <li><Dropdown trigger="About" contents={<AboutContent />} /></li>
+        <li><Dropdown trigger="Examples" contents={<ExamplesContent />} /></li>
+        <li><Dropdown trigger="Load & Download Data" contents={<DownloadUploadContent />} /></li>
         <li><Button onClick={() => createNewNetwork()}>New Network</Button></li>
       </Menu>
       <HeaderSecondLayerContainer>
