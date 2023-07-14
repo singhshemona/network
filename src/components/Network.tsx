@@ -62,7 +62,7 @@ export const Network = () => {
       // connectOnClick
     >
       <Background variant={BackgroundVariant.Dots} />
-      {nodes.length > 10 && <MiniMap />}
+      {nodes.length > 10 && <MiniMap zoomable pannable />}
     </ReactFlow>
   );
 }

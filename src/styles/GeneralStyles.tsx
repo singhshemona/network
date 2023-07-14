@@ -15,9 +15,10 @@ export const AppContainer = styled.div`
   font-family: ${props => props.theme.fonts.default};
 `;
 
+// height here is calculated from subtracting the height of the header from 100vh
 export const ReactFlowContainer = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: 85.2vh;
 `;
 
 export const NodeAndEdgeContainer = styled.div<NodeAndEdgeContainerProps>`
