@@ -42,9 +42,11 @@ export const Button = styled.button`
 `;
 
 export const Input = styled.input`
-  padding: 6px;
   border-radius: ${props => props.theme.borderRadius.default};
   border: 1px solid ${props => props.theme.colors.lightGray};
+  background-color: ${props => props.theme.colors.cream};
+  font-family: ${props => props.theme.fonts.default};
+  padding: 8px;
   width: 100%;
   box-sizing: border-box;
   margin-bottom: 12px;
@@ -56,12 +58,3 @@ export const Label = styled.label`
   margin-bottom: 6px;
 `;
 
-export const Textarea = styled.textarea`
-  font-family: ${props => props.theme.fonts.default};
-  margin-bottom: 6px;
-  padding: 6px;
-  width: 100%;
-  min-height: 120px;
-  box-sizing: border-box;
-  font-size: 14px;
-`;

@@ -3,8 +3,10 @@ import useStore, { RFState } from '../../providers/store';
 import { shallow } from 'zustand/shallow';
 import { Handle, Position, NodeProps } from 'reactflow';
 import { calculateColor } from '../../utils/calculate-color';
-import { NodeContainer, Prompt, Answer } from './TextUpdaterNodeStyles';
-import { Button, Input, Label, Textarea } from '../../styles/GeneralStyles';
+import { NodeContainer, Prompt, Answer, ReactQuillStyled } from './TextUpdaterNodeStyles';
+import { Button, Input, Label } from '../../styles/GeneralStyles';
+import DOMPurify from 'dompurify';
+import 'react-quill/dist/quill.snow.css';
 
 export const TextUpdaterNode = ({ data, id }: NodeProps) => {
   const [isEditActive, setIsEditActive] = useState(false);
@@ -43,6 +45,14 @@ export const TextUpdaterNode = ({ data, id }: NodeProps) => {
     }
   }
 
+  const handleAnswerChange = (content: string) => {
+    handleUpdateAnswer(id, content)
+  }
+
+  const sanitizedData = (data: string) => ({
+    __html: DOMPurify.sanitize(data)
+  })
+
   return (
     <NodeContainer colors={calculateColor(grade.efactor)}>
       <Handle type="target" position={Position.Top} id="a" />
@@ -57,19 +67,24 @@ export const TextUpdaterNode = ({ data, id }: NodeProps) => {
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => handleUpdatePrompt(id, event.target.value)} 
               className="nodrag" />
           <Label htmlFor="answer">Answer:</Label>
-          <Textarea 
+          <ReactQuillStyled
+            modules={{
+              clipboard: {
+                matchVisual: false,
+              },
+            }}
             id="answer" 
-            name="answer" 
-            value={answer}
-            onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => handleUpdateAnswer(id, event.target.value)} 
-            className="nodrag"
-           />
+            className="nodrag" 
+            theme="snow" 
+            value={answer} 
+            onChange={handleAnswerChange} 
+          />
           <Button type="button" onClick={() => setIsEditActive(false)}>Save</Button>
         </form>
         :
         <div onClick={handleNodeClick}>
           <Prompt>{getNodeText(prompt, 'prompt')}</Prompt>
-          <Answer>{getNodeText(answer, 'answer')}</Answer>
+          <Answer dangerouslySetInnerHTML={sanitizedData(getNodeText(answer, 'answer'))} />
         </div>
       }
       <Handle type="source" position={Position.Bottom} id="b" />

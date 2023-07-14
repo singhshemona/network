@@ -3,8 +3,8 @@ import useStore, { RFState } from '../../providers/store';
 import { shallow } from 'zustand/shallow';
 import { EdgeProps, EdgeLabelRenderer, BaseEdge, getBezierPath } from 'reactflow';
 import { calculateColor } from '../../utils/calculate-color';
-import { EdgeContainer } from './TextUpdaterEdgeStyles';
-import { Button, Textarea } from '../../styles/GeneralStyles';
+import { EdgeContainer, Textarea } from './TextUpdaterEdgeStyles';
+import { Button } from '../../styles/GeneralStyles';
 
 export const TextUpdaterEdge = ({ 
   data, 
