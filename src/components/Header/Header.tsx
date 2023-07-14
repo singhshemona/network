@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from 'react';
+import React, { useState, ChangeEvent, DragEvent } from 'react';
 import { shallow } from 'zustand/shallow';
 import useStore, { RFState } from '../../providers/store';
 import { LevelOfDifficulty } from '../LevelOfDifficulty/LevelOfDifficulty';
@@ -40,6 +40,12 @@ export const Header = () => {
   // TODO: not great, figure out better way to warn on refresh
   window.onbeforeunload = () => createNewNetwork;
 
+  const onDragStart = (event: DragEvent<HTMLButtonElement>, nodeType: string) => {
+    if(!event.dataTransfer) return
+    event.dataTransfer.setData('application/reactflow', nodeType);
+    event.dataTransfer.effectAllowed = 'move';
+  };
+
   return (
     <HeaderContainer>
       <Menu>
@@ -47,7 +53,6 @@ export const Header = () => {
         <li><Dropdown trigger="About" contents={<AboutContent />} /></li>
         <li><Dropdown trigger="Examples" contents={<ExamplesContent />} /></li>
         <li><Dropdown trigger="Load & Download Data" contents={<DownloadUploadContent />} /></li>
-        <li><Button onClick={() => createNewNetwork()}>New Network</Button></li>
       </Menu>
       <HeaderSecondLayerContainer>
         {editNetworkName ?
@@ -59,6 +64,10 @@ export const Header = () => {
           :
           <NetworkName onClick={() => setEditNetworkName(true)}>{networkName}</NetworkName>
         }
+        <Button onClick={() => createNewNetwork()}>New Network</Button>
+        <Button onDragStart={(event: DragEvent<HTMLButtonElement>) => onDragStart(event, 'default')} draggable>
+          Add Node
+        </Button>
         <span>Study Mode: <Button onClick={() => setStudyMode(!studyMode)}>{studyMode ? 'ON' : 'OFF'}</Button></span>
         {studyMode && <LevelOfDifficulty />}
       </HeaderSecondLayerContainer>

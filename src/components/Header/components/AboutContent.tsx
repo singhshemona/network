@@ -8,11 +8,11 @@ export const AboutContent = () => {
       <h3>How do you use it?</h3>
       <ol>
         <li>Pick a topic you want to learn, maybe you already flashcards for it (think: Anki).</li>
-        <li>To add a new node, click anywhere on the canvas.</li>
+        <li>To add a new node drag the "Add Node" button onto the canvas.</li>
         <li>For maximum learning efficiency, ensure your prompts and answers <a href="https://andymatuschak.org/prompts/" target="_blank" rel="noreferrer">follow these guidelines</a>.</li>
         <li>Connect nodes that you think relate in some way, then describe that connection in their shared edge's text.</li>
-        <li>To study your cards, click the "On" button next to "Study mode". Try to answer one of the prompts, then rank from 0 (most difficult) to 5 (easiest) how
-          confident you felt answering once you reveal the answer by clicking the card. It's suggested to do your nodes first, then the edges connecting
+        <li>To study your cards, click the "On" button next to "Study mode". Try to answer one of the prompts, then click on one of the ranking buttons depending on how
+          confident you felt answering once you reveal the answer: 0 is most difficult, 5 is the easiest. It's suggested to do your nodes first, then the edges connecting
           those nodes, but you can study as you feel.
         </li>
         <li>Turn study mode off to reveal the strength of your knowledge through color.</li>

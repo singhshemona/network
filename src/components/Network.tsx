@@ -1,4 +1,4 @@
-import React, { useRef, useMemo } from 'react';
+import React, { useRef, useMemo, useCallback, DragEvent } from 'react';
 import { TextUpdaterNode } from './TextUpdaterNode/TextUpdaterNode';
 import { TextUpdaterEdge } from './TextUpdaterEdge/TextUpdaterEdge';
 import { shallow } from 'zustand/shallow';
@@ -31,19 +31,50 @@ export const Network = () => {
   const reactFlowRef = useRef<HTMLInputElement>(null);
   const reactFlowInstance = useReactFlow();
 
-  const getNewNodePosition = (event: React.MouseEvent<HTMLElement>) => {
-    // don't run if we clicked within the existing network
-    let container = document.querySelector('.react-flow__viewport');
-    if(event.target instanceof HTMLElement && container?.contains(event.target)) return;
+  // const getNewNodePosition = (event: React.MouseEvent<HTMLElement>) => {
+  //   // don't run if we clicked within the existing network
+  //   let container = document.querySelector('.react-flow__viewport');
+  //   if(event.target instanceof HTMLElement && container?.contains(event.target)) return;
 
-    const bounds = reactFlowRef.current && reactFlowRef.current.getBoundingClientRect();
-    const position = reactFlowInstance.project({
-      x: event.clientX - (bounds ? bounds.left : 0),
-      y: event.clientY - (bounds ? bounds.top : 0)
-    });
+  //   const bounds = reactFlowRef.current && reactFlowRef.current.getBoundingClientRect();
+  //   const position = reactFlowInstance.project({
+  //     x: event.clientX - (bounds ? bounds.left : 0),
+  //     y: event.clientY - (bounds ? bounds.top : 0)
+  //   });
 
-    addNewNode(position)
-  }
+  //   addNewNode(position)
+  // }
+
+  const onDragOver = useCallback((event: DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+
+    if(!event.dataTransfer) return;
+    event.dataTransfer.dropEffect = 'move';
+  }, []);
+
+  const onDrop = useCallback(
+    (event: DragEvent<HTMLDivElement>) => {
+      event.preventDefault();
+
+      if(!event.dataTransfer) return
+
+      const reactFlowBounds = reactFlowRef.current && reactFlowRef.current.getBoundingClientRect();
+      const type = event.dataTransfer.getData('application/reactflow');
+
+      // check if the dropped element is valid
+      if (typeof type === 'undefined' || !type) {
+        return;
+      }
+
+      const position = reactFlowInstance.project({
+        x: reactFlowBounds ? event.clientX - reactFlowBounds.left : 0,
+        y: reactFlowBounds ? event.clientY - reactFlowBounds.top : 0,
+      });
+      
+      addNewNode(position)
+    },
+    [reactFlowInstance, addNewNode]
+  );
 
   return (
     <ReactFlow 
@@ -54,8 +85,10 @@ export const Network = () => {
       onNodesChange={onNodesChange}
       onEdgesChange={onEdgesChange}
       onConnect={onConnect}
-      onClick={getNewNodePosition}
+      // onClick={getNewNodePosition} // how I orginally added new nodes, clicking anywhere on the canvas
       ref={reactFlowRef}
+      onDrop={onDrop}
+      onDragOver={onDragOver}
 
       // TODO: look into these props
       // fitView
