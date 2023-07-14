@@ -35,3 +35,7 @@ export const HeaderSecondLayerContainer = styled.div`
   align-items: center;
   padding: 14px;
 `;
+
+export const Link = styled.a`
+  color: ${props => props.theme.colors.lightGray};
+`

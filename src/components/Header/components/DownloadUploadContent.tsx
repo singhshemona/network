@@ -1,6 +1,7 @@
 import React, { ChangeEvent } from 'react';
 import { shallow } from 'zustand/shallow';
 import useStore, { RFState } from '../../../providers/store';
+import { Link } from '../HeaderStyles';
 
 export const DownloadUploadContent = () => {
 
@@ -36,32 +37,32 @@ export const DownloadUploadContent = () => {
   return (
     <ul>
       <li>
-        <a 
+        <Link 
           href={`data:text/json;charset=utf-8,${encodeURIComponent(
             JSON.stringify(nodes)
           )}`}
           download={`${networkName} Nodes Data.json`}
         >
         Download Nodes Data
-        </a>
+        </Link>
       </li>
       <li>
-        <a 
+        <Link 
           href={`data:text/json;charset=utf-8,${encodeURIComponent(
             JSON.stringify(edges)
           )}`}
           download={`${networkName} Edges Data.json`}
         >
           Download Edges Data
-        </a>
+        </Link>
       </li>
       <li>
         <label htmlFor="nodes data">Upload Nodes Data</label>
-        <input id="nodes data" type="file" onChange={(event) => handleDataUpload('nodes', event)} />
+        <input id="nodes data" type="file" onChange={(event: ChangeEvent<HTMLInputElement>) => handleDataUpload('nodes', event)} />
       </li>
       <li>
         <label htmlFor="edges data">Upload Edges Data</label>
-        <input id="nodes data" type="file" onChange={(event) => handleDataUpload('edges', event)} />
+        <input id="nodes data" type="file" onChange={(event: ChangeEvent<HTMLInputElement>) => handleDataUpload('edges', event)} />
       </li>
     </ul>
   );

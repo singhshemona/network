@@ -22,11 +22,11 @@
   font-family: Barlow, sans-serif;
 }
 
-p, 
-ul,
-h1, 
-h2, 
-h3,
+.react-flow__renderer p, 
+.react-flow__renderer ul,
+.react-flow__renderer h1, 
+.react-flow__renderer h2, 
+.react-flow__renderer h3,
 .ql-editor p, 
 .ql-editor ul, 
 .ql-editor h1, 
