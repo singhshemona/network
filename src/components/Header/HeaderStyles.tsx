@@ -39,3 +39,7 @@ export const HeaderSecondLayerContainer = styled.div`
 export const Link = styled.a`
   color: ${props => props.theme.colors.lightGray};
 `
+
+export const NetworkNameEditContainer = styled.div`
+  max-width: 200px;
+`

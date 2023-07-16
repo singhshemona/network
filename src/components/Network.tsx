@@ -89,10 +89,7 @@ export const Network = () => {
       ref={reactFlowRef}
       onDrop={onDrop}
       onDragOver={onDragOver}
-
-      // TODO: look into these props
-      // fitView
-      // connectOnClick
+      fitView
     >
       <Background variant={BackgroundVariant.Dots} />
       {nodes.length > 10 && <MiniMap zoomable pannable />}
