@@ -41,5 +41,8 @@ export const Link = styled.a`
 `
 
 export const NetworkNameEditContainer = styled.div`
-  max-width: 200px;
+  max-width: 250px;
+  display: flex;
+  align-items: end;
+  gap: 10px;
 `

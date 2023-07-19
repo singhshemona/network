@@ -12,9 +12,17 @@ export const AboutContent = () => {
         <li>For maximum learning efficiency, ensure your prompts and answers <a href="https://andymatuschak.org/prompts/" target="_blank" rel="noreferrer">follow these guidelines</a>.</li>
         <li>Connect nodes that you think relate in some way, then describe that connection in their shared edge's text.</li>
         <li>To study your cards, click the "On" button next to "Study mode". Try to answer one of the prompts, then click on one of the ranking buttons depending on how
-          confident you felt answering once you reveal the answer: 0 is most difficult, 5 is the easiest. It's suggested to do your nodes first, then the edges connecting
+          confident you felt answering once you reveal the answer - see below for scoring guide. It's suggested to do your nodes first, then the edges connecting
           those nodes, but you can study as you feel.
         </li>
+        <ul>
+          <li>5 - perfect response</li>
+          <li>4 - correct response after a hesitation</li>
+          <li>3 - correct response recalled with serious difficulty</li>
+          <li>2 - incorrect response; where the correct one seemed easy to recall</li>
+          <li>1 - incorrect response; the correct one remembered</li>
+          <li>0 - complete blackout</li>
+        </ul>
         <li>Turn study mode off to reveal the strength of your knowledge through color.</li>
       </ol>
       <h3>Helpful tips:</h3>

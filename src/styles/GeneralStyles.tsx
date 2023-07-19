@@ -5,6 +5,10 @@ type NodeAndEdgeContainerProps = {
   colors: NodeColor;
 }
 
+type InputProps = {
+  marginBottom?: string;
+}
+
 export const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
@@ -42,15 +46,16 @@ export const Button = styled.button`
   }
 `;
 
-export const Input = styled.input`
+export const Input = styled.input<InputProps>`
   border-radius: ${props => props.theme.borderRadius.default};
   border: 1px solid ${props => props.theme.colors.lightGray};
   background-color: ${props => props.theme.colors.cream};
   font-family: ${props => props.theme.fonts.default};
   padding: 8px;
   width: 100%;
+  height: 30px;
   box-sizing: border-box;
-  margin-bottom: 12px;
+  margin-bottom: ${({ marginBottom }) => marginBottom ? marginBottom : '12px'};
 `;
 
 export const Label = styled.label`

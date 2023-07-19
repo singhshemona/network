@@ -57,8 +57,10 @@ export const Header = () => {
       <HeaderSecondLayerContainer>
         {editNetworkName ?
           <NetworkNameEditContainer>
-            <label htmlFor="network name">Change Network Name</label>
-            <Input value={networkName} id="network name" type="text" onChange={(event: ChangeEvent<HTMLInputElement>) => setNetworkName(event.target.value)} />
+            <div>
+              <label htmlFor="network name">Change Network Name</label>
+              <Input marginBottom="0" value={networkName} id="network name" type="text" onChange={(event: ChangeEvent<HTMLInputElement>) => setNetworkName(event.target.value)} />
+            </div>
             <Button onClick={() => setEditNetworkName(false)}>Save</Button>
           </NetworkNameEditContainer>
           :
