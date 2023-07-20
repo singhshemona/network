@@ -22,3 +22,7 @@ export const Textarea = styled.textarea`
   box-sizing: border-box;
   font-size: 14px;
 `;
+
+export const DefaultContent = styled.span`
+  cursor: pointer;
+`;

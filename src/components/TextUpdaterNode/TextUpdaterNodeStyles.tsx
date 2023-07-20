@@ -22,3 +22,7 @@ export const ReactQuillStyled = styled(ReactQuill)`
   background-color: #FEFCF6;
   margin-bottom: 12px;
 `;
+
+export const DefaultContent = styled.div`
+  cursor: pointer;
+`;

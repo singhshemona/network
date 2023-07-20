@@ -3,7 +3,7 @@ import useStore, { RFState } from '../../providers/store';
 import { shallow } from 'zustand/shallow';
 import { Handle, Position, NodeProps } from 'reactflow';
 import { calculateColor } from '../../utils/calculate-color';
-import { NodeContainer, Prompt, Answer, ReactQuillStyled } from './TextUpdaterNodeStyles';
+import { NodeContainer, Prompt, Answer, ReactQuillStyled, DefaultContent } from './TextUpdaterNodeStyles';
 import { Button, Input, Label } from '../../styles/GeneralStyles';
 import DOMPurify from 'dompurify';
 import 'react-quill/dist/quill.snow.css';
@@ -82,10 +82,10 @@ export const TextUpdaterNode = ({ data, id }: NodeProps) => {
           <Button type="button" onClick={() => setIsEditActive(false)}>Save</Button>
         </form>
         :
-        <div onClick={handleNodeClick}>
+        <DefaultContent onClick={handleNodeClick}>
           <Prompt>{getNodeText(prompt, 'prompt')}</Prompt>
           <Answer dangerouslySetInnerHTML={sanitizedData(getNodeText(answer, 'answer'))} />
-        </div>
+        </DefaultContent>
       }
       <Handle type="source" position={Position.Bottom} id="b" />
     </NodeContainer>

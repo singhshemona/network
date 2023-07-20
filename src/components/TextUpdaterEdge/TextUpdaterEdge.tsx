@@ -3,7 +3,7 @@ import useStore, { RFState } from '../../providers/store';
 import { shallow } from 'zustand/shallow';
 import { EdgeProps, EdgeLabelRenderer, BaseEdge, getBezierPath } from 'reactflow';
 import { calculateColor } from '../../utils/calculate-color';
-import { EdgeContainer, Textarea } from './TextUpdaterEdgeStyles';
+import { EdgeContainer, Textarea, DefaultContent } from './TextUpdaterEdgeStyles';
 import { Button } from '../../styles/GeneralStyles';
 
 export const TextUpdaterEdge = ({ 
@@ -77,7 +77,7 @@ export const TextUpdaterEdge = ({
               <Button type="button" onClick={() => setIsEditActive(false)}>Save</Button>
             </form>
             :
-            <span onClick={handleEdgeClick}>{getEdgeText(connection)}</span>
+            <DefaultContent onClick={handleEdgeClick}>{getEdgeText(connection)}</DefaultContent>
           }
         </EdgeContainer>
       </EdgeLabelRenderer>
