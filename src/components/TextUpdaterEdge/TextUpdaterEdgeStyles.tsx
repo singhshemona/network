@@ -21,8 +21,5 @@ export const Textarea = styled.textarea`
   min-height: 120px;
   box-sizing: border-box;
   font-size: 14px;
-`;
-
-export const DefaultContent = styled.span`
-  cursor: pointer;
+  pointer-events: all;
 `;

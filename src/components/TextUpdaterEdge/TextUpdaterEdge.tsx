@@ -3,7 +3,7 @@ import useStore, { RFState } from '../../providers/store';
 import { shallow } from 'zustand/shallow';
 import { EdgeProps, EdgeLabelRenderer, BaseEdge, getBezierPath } from 'reactflow';
 import { calculateColor } from '../../utils/calculate-color';
-import { EdgeContainer, Textarea, DefaultContent } from './TextUpdaterEdgeStyles';
+import { EdgeContainer, Textarea } from './TextUpdaterEdgeStyles';
 import { Button } from '../../styles/GeneralStyles';
 
 export const TextUpdaterEdge = ({ 
@@ -63,7 +63,7 @@ export const TextUpdaterEdge = ({
     <>
       <BaseEdge id={id} markerEnd={markerEnd} path={edgePath} />
       <EdgeLabelRenderer>
-        <EdgeContainer colors={calculateColor(grade.efactor)} labelX={labelX} labelY={labelY}>
+        <EdgeContainer onClick={() => !isEditActive && handleEdgeClick()} colors={calculateColor(grade.efactor)} labelX={labelX} labelY={labelY}>
           {isEditActive ?
             <form>
               <label htmlFor="connection">Connection:
@@ -72,12 +72,13 @@ export const TextUpdaterEdge = ({
                   name="connection" 
                   value={connection}
                   onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => onUpdateEdge(id, event.target.value)} 
-                  className="nodrag" />
+                  className="nodrag" 
+                />
               </label>
               <Button type="button" onClick={() => setIsEditActive(false)}>Save</Button>
             </form>
             :
-            <DefaultContent onClick={handleEdgeClick}>{getEdgeText(connection)}</DefaultContent>
+            <span>{getEdgeText(connection)}</span>
           }
         </EdgeContainer>
       </EdgeLabelRenderer>
