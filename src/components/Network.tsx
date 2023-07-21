@@ -1,10 +1,15 @@
-import React, { useRef, useMemo, useCallback, DragEvent } from 'react';
-import { TextUpdaterNode } from './TextUpdaterNode/TextUpdaterNode';
-import { TextUpdaterEdge } from './TextUpdaterEdge/TextUpdaterEdge';
-import { shallow } from 'zustand/shallow';
-import useStore, { RFState } from '../providers/store';
-import ReactFlow, { MiniMap, Background, BackgroundVariant, useReactFlow } from 'reactflow';
-import 'reactflow/dist/style.css';
+import React, { useRef, useMemo, useCallback, DragEvent } from "react";
+import { TextUpdaterNode } from "./TextUpdaterNode/TextUpdaterNode";
+import { TextUpdaterEdge } from "./TextUpdaterEdge/TextUpdaterEdge";
+import { shallow } from "zustand/shallow";
+import useStore, { RFState } from "../providers/store";
+import ReactFlow, {
+  MiniMap,
+  Background,
+  BackgroundVariant,
+  useReactFlow,
+} from "reactflow";
+import "reactflow/dist/style.css";
 
 export const Network = () => {
   const selector = (state: RFState) => ({
@@ -16,14 +21,8 @@ export const Network = () => {
     addNewNode: state.addNewNode,
   });
 
-  const { 
-    nodes, 
-    edges, 
-    onNodesChange, 
-    onEdgesChange, 
-    onConnect,
-    addNewNode,
-  } = useStore(selector, shallow);
+  const { nodes, edges, onNodesChange, onEdgesChange, onConnect, addNewNode } =
+    useStore(selector, shallow);
 
   const nodeTypes = useMemo(() => ({ textUpdaterNode: TextUpdaterNode }), []);
   const edgeTypes = useMemo(() => ({ textUpdaterEdge: TextUpdaterEdge }), []);
@@ -48,21 +47,22 @@ export const Network = () => {
   const onDragOver = useCallback((event: DragEvent<HTMLDivElement>) => {
     event.preventDefault();
 
-    if(!event.dataTransfer) return;
-    event.dataTransfer.dropEffect = 'move';
+    if (!event.dataTransfer) return;
+    event.dataTransfer.dropEffect = "move";
   }, []);
 
   const onDrop = useCallback(
     (event: DragEvent<HTMLDivElement>) => {
       event.preventDefault();
 
-      if(!event.dataTransfer) return
+      if (!event.dataTransfer) return;
 
-      const reactFlowBounds = reactFlowRef.current && reactFlowRef.current.getBoundingClientRect();
-      const type = event.dataTransfer.getData('application/reactflow');
+      const reactFlowBounds =
+        reactFlowRef.current && reactFlowRef.current.getBoundingClientRect();
+      const type = event.dataTransfer.getData("application/reactflow");
 
       // check if the dropped element is valid
-      if (typeof type === 'undefined' || !type) {
+      if (typeof type === "undefined" || !type) {
         return;
       }
 
@@ -70,14 +70,14 @@ export const Network = () => {
         x: reactFlowBounds ? event.clientX - reactFlowBounds.left : 0,
         y: reactFlowBounds ? event.clientY - reactFlowBounds.top : 0,
       });
-      
-      addNewNode(position)
+
+      addNewNode(position);
     },
-    [reactFlowInstance, addNewNode]
+    [reactFlowInstance, addNewNode],
   );
 
   return (
-    <ReactFlow 
+    <ReactFlow
       nodes={nodes}
       edges={edges}
       nodeTypes={nodeTypes}
@@ -95,4 +95,4 @@ export const Network = () => {
       {nodes.length > 10 && <MiniMap zoomable pannable />}
     </ReactFlow>
   );
-}
+};

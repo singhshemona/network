@@ -1,6 +1,6 @@
-import { create } from 'zustand';
-import { initialNodes, initialEdges } from '../data/initial';
-import { practice } from '../utils/calculate-grade';
+import { create } from "zustand";
+import { initialNodes, initialEdges } from "../data/initial";
+import { practice } from "../utils/calculate-grade";
 import {
   Connection,
   Edge,
@@ -13,8 +13,8 @@ import {
   OnConnect,
   applyNodeChanges,
   applyEdgeChanges,
-} from 'reactflow';
-import { SuperMemoGrade } from 'supermemo';
+} from "reactflow";
+import { SuperMemoGrade } from "supermemo";
 
 export type RFState = {
   nodes: Node[];
@@ -31,7 +31,7 @@ export type RFState = {
   onUpdateEdge: (id: string, text: string) => void;
   handleUpdatePrompt: (id: string, text: string) => void;
   handleUpdateAnswer: (id: string, text: string) => void;
-  addNewNode: (position: {x: number, y: number}) => void;
+  addNewNode: (position: { x: number; y: number }) => void;
   setStudyMode: (boolean: boolean) => void;
   setNodeGrade: (id: string, grade: SuperMemoGrade) => void;
   setEdgeGrade: (id: string, grade: SuperMemoGrade) => void;
@@ -41,7 +41,7 @@ const useStore = create<RFState>((set, get) => ({
   nodes: initialNodes,
   edges: initialEdges,
   studyMode: false,
-  networkName: 'Network Name',
+  networkName: "Network Name",
 
   setNodesAndEdges: (nodes: Node[], edges: Edge[]) => {
     set({
@@ -49,7 +49,7 @@ const useStore = create<RFState>((set, get) => ({
       edges: edges,
     });
   },
-  
+
   setNetworkName: (networkName: string) => {
     set({
       networkName: networkName,
@@ -70,18 +70,22 @@ const useStore = create<RFState>((set, get) => ({
 
   onConnect: (params: Connection) => {
     set({
-      edges: addEdge({ ...params, 
-        data: { 
-          connection: 'click to edit connection',
-          grade: {
-            interval: 0,
-            repetition: 0,
-            efactor: 2.5,
-            dueDate: '',
-          }
+      edges: addEdge(
+        {
+          ...params,
+          data: {
+            connection: "click to edit connection",
+            grade: {
+              interval: 0,
+              repetition: 0,
+              efactor: 2.5,
+              dueDate: "",
+            },
+          },
+          type: "textUpdaterEdge",
         },
-        type: 'textUpdaterEdge',
-      }, get().edges),
+        get().edges,
+      ),
     });
   },
 
@@ -130,33 +134,33 @@ const useStore = create<RFState>((set, get) => ({
     });
   },
 
-  addNewNode: (position: {x: number, y: number}) => {
+  addNewNode: (position: { x: number; y: number }) => {
     const newNode = {
       id: (get().nodes.length + 1).toString(),
-      data: { 
-        prompt: 'click to edit prompt', 
-        answer: 'click to edit answer',
+      data: {
+        prompt: "click to edit prompt",
+        answer: "click to edit answer",
         grade: {
           interval: 0,
           repetition: 0,
           efactor: 2.5,
-          dueDate: '',
-        }
+          dueDate: "",
+        },
       },
-      type: 'textUpdaterNode',
+      type: "textUpdaterNode",
       position: position,
-      className: 'light',
+      className: "light",
     };
 
     set({
-      nodes: applyNodeChanges([{item: newNode, type: 'add'}], get().nodes),
+      nodes: applyNodeChanges([{ item: newNode, type: "add" }], get().nodes),
     });
   },
 
   setStudyMode: (boolean: boolean) => {
     set({
       studyMode: boolean,
-    })
+    });
   },
 
   setNodeGrade: (id: string, grade: SuperMemoGrade) => {

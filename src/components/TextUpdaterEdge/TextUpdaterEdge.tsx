@@ -1,14 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import useStore, { RFState } from '../../providers/store';
-import { shallow } from 'zustand/shallow';
-import { EdgeProps, EdgeLabelRenderer, BaseEdge, getBezierPath } from 'reactflow';
-import { calculateColor } from '../../utils/calculate-color';
-import { EdgeContainer, Textarea } from './TextUpdaterEdgeStyles';
-import { Button, Form, DefaultContent } from '../../styles/GeneralStyles';
-import { LevelOfDifficulty } from '../LevelOfDifficulty/LevelOfDifficulty';
+import React, { useState, useEffect } from "react";
+import useStore, { RFState } from "../../providers/store";
+import { shallow } from "zustand/shallow";
+import {
+  EdgeProps,
+  EdgeLabelRenderer,
+  BaseEdge,
+  getBezierPath,
+} from "reactflow";
+import { calculateColor } from "../../utils/calculate-color";
+import { EdgeContainer, Textarea } from "./TextUpdaterEdgeStyles";
+import { Button, Form, DefaultContent } from "../../styles/GeneralStyles";
+import { LevelOfDifficulty } from "../LevelOfDifficulty/LevelOfDifficulty";
 
-export const TextUpdaterEdge = ({ 
-  data, 
+export const TextUpdaterEdge = ({
+  data,
   id,
   sourceX,
   sourceY,
@@ -16,7 +21,7 @@ export const TextUpdaterEdge = ({
   targetX,
   targetY,
   targetPosition,
-  markerEnd
+  markerEnd,
 }: EdgeProps) => {
   const [isEditActive, setIsEditActive] = useState(false);
   const [internalStudyMode, setInternalStudyMode] = useState(false);
@@ -31,27 +36,27 @@ export const TextUpdaterEdge = ({
   const { connection, grade } = data;
 
   useEffect(() => {
-    setInternalStudyMode(studyMode ? true : false)
-  }, [studyMode])
+    setInternalStudyMode(studyMode ? true : false);
+  }, [studyMode]);
 
   const getEdgeText = (connection: string): string => {
-    if(internalStudyMode && connection) {
-      return 'Click to reveal connection'
-    } else if(connection) {
-      return connection
-    } else return 'Click to edit connection'
-  }
+    if (internalStudyMode && connection) {
+      return "Click to reveal connection";
+    } else if (connection) {
+      return connection;
+    } else return "Click to edit connection";
+  };
 
   const handleEdgeClick = () => {
-    if(internalStudyMode) {
-      setInternalStudyMode(false)
-      setShowGrading(true)
-    } else if(showGrading) {
-      setShowGrading(false)
+    if (internalStudyMode) {
+      setInternalStudyMode(false);
+      setShowGrading(true);
+    } else if (showGrading) {
+      setShowGrading(false);
     } else {
-      setIsEditActive(true)
+      setIsEditActive(true);
     }
-  }
+  };
 
   const [edgePath, labelX, labelY] = getBezierPath({
     sourceX,
@@ -66,28 +71,43 @@ export const TextUpdaterEdge = ({
     <>
       <BaseEdge id={id} markerEnd={markerEnd} path={edgePath} />
       <EdgeLabelRenderer>
-        <EdgeContainer colors={calculateColor(grade.efactor)} labelX={labelX} labelY={labelY}>
-          {isEditActive ?
+        <EdgeContainer
+          colors={calculateColor(grade.efactor)}
+          labelX={labelX}
+          labelY={labelY}
+        >
+          {isEditActive ? (
             <Form>
-              <label htmlFor="connection">Connection:
+              <label htmlFor="connection">
+                Connection:
                 <Textarea
-                  id="connection" 
-                  name="connection" 
+                  id="connection"
+                  name="connection"
                   value={connection}
-                  onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => onUpdateEdge(id, event.target.value)} 
-                  className="nodrag" 
+                  onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) =>
+                    onUpdateEdge(id, event.target.value)
+                  }
+                  className="nodrag"
                 />
               </label>
-              <Button type="button" onClick={() => setIsEditActive(false)}>Save</Button>
+              <Button type="button" onClick={() => setIsEditActive(false)}>
+                Save
+              </Button>
             </Form>
-            :
+          ) : (
             <DefaultContent onClick={handleEdgeClick}>
-             <span>{getEdgeText(connection)}</span> 
-             {showGrading && <LevelOfDifficulty id={id} type="edge" onClick={() => setShowGrading(false)} />}
+              <span>{getEdgeText(connection)}</span>
+              {showGrading && (
+                <LevelOfDifficulty
+                  id={id}
+                  type="edge"
+                  onClick={() => setShowGrading(false)}
+                />
+              )}
             </DefaultContent>
-          }
+          )}
         </EdgeContainer>
       </EdgeLabelRenderer>
     </>
   );
-}
+};

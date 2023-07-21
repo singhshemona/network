@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import { NodeAndEdgeContainer } from '../../styles/GeneralStyles';
-import ReactQuill from 'react-quill';
+import styled from "styled-components";
+import { NodeAndEdgeContainer } from "../../styles/GeneralStyles";
+import ReactQuill from "react-quill";
 
 export const NodeContainer = styled(NodeAndEdgeContainer)`
   max-width: 350px;
@@ -8,7 +8,7 @@ export const NodeContainer = styled(NodeAndEdgeContainer)`
 `;
 
 export const Prompt = styled.p`
-  font-weight: ${props => props.theme.fontWeight.bold};
+  font-weight: ${(props) => props.theme.fontWeight.bold};
   margin: 0;
   font-size: 18px;
 `;
@@ -19,6 +19,6 @@ export const Answer = styled.p`
 `;
 
 export const ReactQuillStyled = styled(ReactQuill)`
-  background-color: #FEFCF6;
+  background-color: #fefcf6;
   margin-bottom: 12px;
 `;

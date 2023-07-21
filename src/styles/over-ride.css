@@ -1,6 +1,6 @@
-.ql-toolbar.ql-snow, 
+.ql-toolbar.ql-snow,
 .ql-container.ql-snow {
-  border-color: #7B7871;
+  border-color: #7b7871;
 }
 
 .ql-toolbar.ql-snow {
@@ -22,15 +22,15 @@
   font-family: Barlow, sans-serif;
 }
 
-.react-flow__renderer p, 
+.react-flow__renderer p,
 .react-flow__renderer ul,
-.react-flow__renderer h1, 
-.react-flow__renderer h2, 
+.react-flow__renderer h1,
+.react-flow__renderer h2,
 .react-flow__renderer h3,
-.ql-editor p, 
-.ql-editor ul, 
-.ql-editor h1, 
-.ql-editor h2, 
+.ql-editor p,
+.ql-editor ul,
+.ql-editor h1,
+.ql-editor h2,
 .ql-editor h3 {
   margin: 6px 0;
 }

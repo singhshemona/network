@@ -1,4 +1,4 @@
 export type NodeColor = {
-  light: string,
-  dark: string
-}
+  light: string;
+  dark: string;
+};
