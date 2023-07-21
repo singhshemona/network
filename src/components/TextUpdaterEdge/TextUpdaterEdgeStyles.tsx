@@ -2,13 +2,13 @@ import styled from "styled-components";
 import { NodeAndEdgeContainer } from "../../styles/GeneralStyles";
 
 type EdgeContainerProps = {
-  labelX: number;
-  labelY: number;
+  $labelX: number;
+  $labelY: number;
 };
 
 export const EdgeContainer = styled(NodeAndEdgeContainer)<EdgeContainerProps>`
-  transform: ${({ labelX, labelY }) =>
-    `translate(-50%, -50%) translate(${labelX}px,${labelY}px)`};
+  transform: ${({ $labelX, $labelY }) =>
+    `translate(-50%, -50%) translate(${$labelX}px,${$labelY}px)`};
   max-width: 160px;
   position: absolute;
   pointer-events: all;

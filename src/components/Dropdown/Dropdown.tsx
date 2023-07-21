@@ -26,7 +26,7 @@ export const Dropdown = ({ trigger, contents }: DropdownProps) => {
   return (
     <DropdownContainer ref={ref}>
       <Trigger
-        isOpen={isOpen}
+        $isOpen={isOpen}
         onClick={() => setIsOpen((prevState) => !prevState)}
       >
         {trigger} {isOpen ? "-" : "+"}{" "}

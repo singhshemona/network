@@ -72,9 +72,9 @@ export const TextUpdaterEdge = ({
       <BaseEdge id={id} markerEnd={markerEnd} path={edgePath} />
       <EdgeLabelRenderer>
         <EdgeContainer
-          colors={calculateColor(grade.efactor)}
-          labelX={labelX}
-          labelY={labelY}
+          $colors={calculateColor(grade.efactor)}
+          $labelX={labelX}
+          $labelY={labelY}
         >
           {isEditActive ? (
             <Form>
