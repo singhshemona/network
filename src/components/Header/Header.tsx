@@ -1,7 +1,6 @@
 import React, { useState, ChangeEvent, DragEvent } from 'react';
 import { shallow } from 'zustand/shallow';
 import useStore, { RFState } from '../../providers/store';
-import { LevelOfDifficulty } from '../LevelOfDifficulty/LevelOfDifficulty';
 import { HeaderContainer, Menu, Title, NetworkName, HeaderSecondLayerContainer, NetworkNameEditContainer } from './HeaderStyles';
 import { Dropdown } from '../Dropdown/Dropdown';
 import { Button, Input } from '../../styles/GeneralStyles';
@@ -71,7 +70,6 @@ export const Header = () => {
           Add Node
         </Button>
         <span>Study Mode: <Button onClick={() => setStudyMode(!studyMode)}>{studyMode ? 'ON' : 'OFF'}</Button></span>
-        {studyMode && <LevelOfDifficulty />}
       </HeaderSecondLayerContainer>
     </HeaderContainer>
   );

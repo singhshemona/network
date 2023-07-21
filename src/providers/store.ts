@@ -23,7 +23,6 @@ export type RFState = {
   studyMode: boolean;
   networkName: string;
   setNetworkName: (networkName: string) => void;
-  currentlyStudying: {type: string | undefined, id: string | undefined};
   onNodesChange: OnNodesChange;
   onEdgesChange: OnEdgesChange;
   onConnect: OnConnect;
@@ -34,9 +33,8 @@ export type RFState = {
   handleUpdateAnswer: (id: string, text: string) => void;
   addNewNode: (position: {x: number, y: number}) => void;
   setStudyMode: (boolean: boolean) => void;
-  setCurrentlyStudying: (type: string, id: string) => void;
-  setNodeGrade: (grade: SuperMemoGrade) => void;
-  setEdgeGrade: (grade: SuperMemoGrade) => void;
+  setNodeGrade: (id: string, grade: SuperMemoGrade) => void;
+  setEdgeGrade: (id: string, grade: SuperMemoGrade) => void;
 };
 
 const useStore = create<RFState>((set, get) => ({
@@ -57,8 +55,6 @@ const useStore = create<RFState>((set, get) => ({
       networkName: networkName,
     });
   },
-
-  currentlyStudying: {type: undefined, id: undefined},
 
   onNodesChange: (changes: NodeChange[]) => {
     set({
@@ -163,16 +159,10 @@ const useStore = create<RFState>((set, get) => ({
     })
   },
 
-  setCurrentlyStudying: (type: string, id: string) => {
-    set({
-      currentlyStudying: {type: type, id: id},
-    })
-  },
-
-  setNodeGrade: (grade: SuperMemoGrade) => {
+  setNodeGrade: (id: string, grade: SuperMemoGrade) => {
     set({
       nodes: get().nodes.map((node) => {
-        if (node.id === get().currentlyStudying.id) {
+        if (node.id === id) {
           node.data.grade = practice(node.data.grade, grade);
         }
         return node;
@@ -180,10 +170,10 @@ const useStore = create<RFState>((set, get) => ({
     });
   },
 
-  setEdgeGrade: (grade: SuperMemoGrade) => {
+  setEdgeGrade: (id: string, grade: SuperMemoGrade) => {
     set({
       edges: get().edges.map((edge) => {
-        if (edge.id === get().currentlyStudying.id) {
+        if (edge.id === id) {
           edge.data.grade = practice(edge.data.grade, grade);
         }
         return edge;

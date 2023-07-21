@@ -5,19 +5,25 @@ import { SuperMemoGrade } from 'supermemo';
 import { Button } from '../../styles/GeneralStyles';
 import { OptionsContainer } from './LevelOfDifficultyStyles';
 
-export const LevelOfDifficulty = () => {
+type LevelOfDifficultyProps = {
+  id: string;
+  type: string;
+  onClick: () => void;
+}
+export const LevelOfDifficulty = ({id, type, onClick}: LevelOfDifficultyProps) => {
   const selector = (state: RFState) => ({
-    currentlyStudying: state.currentlyStudying,
     setNodeGrade: state.setNodeGrade,
     setEdgeGrade: state.setEdgeGrade,
   });
 
-  const { currentlyStudying, setNodeGrade, setEdgeGrade } = useStore(selector, shallow);
+  const { setNodeGrade, setEdgeGrade } = useStore(selector, shallow);
 
   const setGrade = (grade: SuperMemoGrade) => {
-    if(currentlyStudying.type === 'node') {
-      setNodeGrade(grade)
-    } else setEdgeGrade(grade)
+    if(type === 'node') {
+      setNodeGrade(id, grade)
+    } else setEdgeGrade(id, grade)
+
+    onClick()
   }
 
   return (

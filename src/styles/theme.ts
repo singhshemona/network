@@ -26,4 +26,7 @@ export const theme = {
   fontWeight: {
     bold: 600,
   },
+  padding: {
+    card: '12px'
+  }
 };

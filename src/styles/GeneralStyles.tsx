@@ -27,7 +27,6 @@ export const ReactFlowContainer = styled.div`
 
 export const NodeAndEdgeContainer = styled.div<NodeAndEdgeContainerProps>`
   border-radius: ${props => props.theme.borderRadius.default};
-  padding: 12px;
   color: ${props => props.theme.colors.darkGray};
   border: ${({colors}) => `1px solid ${colors.dark}`};
   background-color: ${({colors}) => colors.light};
@@ -64,3 +63,11 @@ export const Label = styled.label`
   margin-bottom: 6px;
 `;
 
+export const DefaultContent = styled.div`
+  padding: ${props => props.theme.padding.card};
+  cursor: pointer;
+`;
+
+export const Form = styled.form`
+  padding: ${props => props.theme.padding.card};
+`;

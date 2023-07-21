@@ -4,22 +4,23 @@ import { shallow } from 'zustand/shallow';
 import { Handle, Position, NodeProps } from 'reactflow';
 import { calculateColor } from '../../utils/calculate-color';
 import { NodeContainer, Prompt, Answer, ReactQuillStyled } from './TextUpdaterNodeStyles';
-import { Button, Input, Label } from '../../styles/GeneralStyles';
+import { Button, Input, Label, Form, DefaultContent } from '../../styles/GeneralStyles';
 import DOMPurify from 'dompurify';
 import 'react-quill/dist/quill.snow.css';
+import { LevelOfDifficulty } from '../LevelOfDifficulty/LevelOfDifficulty';
 
 export const TextUpdaterNode = ({ data, id }: NodeProps) => {
   const [isEditActive, setIsEditActive] = useState(false);
   const [internalStudyMode, setInternalStudyMode] = useState(false);
+  const [showGrading, setShowGrading] = useState(false);
 
   const selector = (state: RFState) => ({
     handleUpdatePrompt: state.handleUpdatePrompt,
     handleUpdateAnswer: state.handleUpdateAnswer,
     studyMode: state.studyMode,
-    setCurrentlyStudying: state.setCurrentlyStudying,
   });
 
-  const { handleUpdatePrompt, handleUpdateAnswer, studyMode, setCurrentlyStudying } = useStore(selector, shallow);
+  const { handleUpdatePrompt, handleUpdateAnswer, studyMode } = useStore(selector, shallow);
   const { prompt, answer, grade } = data;
 
   useEffect(() => {
@@ -38,8 +39,10 @@ export const TextUpdaterNode = ({ data, id }: NodeProps) => {
 
   const handleNodeClick = () => {
     if(internalStudyMode) {
-      setCurrentlyStudying('node', id)
       setInternalStudyMode(false)
+      setShowGrading(true)
+    } else if(showGrading) {
+      setShowGrading(false)
     } else {
       setIsEditActive(true)
     }
@@ -54,10 +57,10 @@ export const TextUpdaterNode = ({ data, id }: NodeProps) => {
   })
 
   return (
-    <NodeContainer colors={calculateColor(grade.efactor)} onClick={() => !isEditActive && handleNodeClick()}>
+    <NodeContainer colors={calculateColor(grade.efactor)}>
       <Handle type="target" position={Position.Top} id="a" />
       {isEditActive ?
-        <form>
+        <Form>
           <Label htmlFor="prompt">Prompt:</Label>
           <Input 
               type="text"
@@ -80,12 +83,13 @@ export const TextUpdaterNode = ({ data, id }: NodeProps) => {
             onChange={handleAnswerChange} 
           />
           <Button type="button" onClick={() => setIsEditActive(false)}>Save</Button>
-        </form>
+        </Form>
         :
-        <div>
+        <DefaultContent onClick={handleNodeClick}>
           <Prompt>{getNodeText(prompt, 'prompt')}</Prompt>
           <Answer dangerouslySetInnerHTML={sanitizedData(getNodeText(answer, 'answer'))} />
-        </div>
+          {showGrading && <LevelOfDifficulty id={id} type="node" onClick={() => setShowGrading(false)} />}
+        </DefaultContent>
       }
       <Handle type="source" position={Position.Bottom} id="b" />
     </NodeContainer>

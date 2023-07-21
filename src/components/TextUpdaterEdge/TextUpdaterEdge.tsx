@@ -4,7 +4,8 @@ import { shallow } from 'zustand/shallow';
 import { EdgeProps, EdgeLabelRenderer, BaseEdge, getBezierPath } from 'reactflow';
 import { calculateColor } from '../../utils/calculate-color';
 import { EdgeContainer, Textarea } from './TextUpdaterEdgeStyles';
-import { Button } from '../../styles/GeneralStyles';
+import { Button, Form, DefaultContent } from '../../styles/GeneralStyles';
+import { LevelOfDifficulty } from '../LevelOfDifficulty/LevelOfDifficulty';
 
 export const TextUpdaterEdge = ({ 
   data, 
@@ -19,14 +20,14 @@ export const TextUpdaterEdge = ({
 }: EdgeProps) => {
   const [isEditActive, setIsEditActive] = useState(false);
   const [internalStudyMode, setInternalStudyMode] = useState(false);
+  const [showGrading, setShowGrading] = useState(false);
 
   const selector = (state: RFState) => ({
     onUpdateEdge: state.onUpdateEdge,
     studyMode: state.studyMode,
-    setCurrentlyStudying: state.setCurrentlyStudying,
   });
 
-  const { onUpdateEdge, studyMode, setCurrentlyStudying } = useStore(selector, shallow);
+  const { onUpdateEdge, studyMode } = useStore(selector, shallow);
   const { connection, grade } = data;
 
   useEffect(() => {
@@ -43,8 +44,10 @@ export const TextUpdaterEdge = ({
 
   const handleEdgeClick = () => {
     if(internalStudyMode) {
-      setCurrentlyStudying('edge', id)
       setInternalStudyMode(false)
+      setShowGrading(true)
+    } else if(showGrading) {
+      setShowGrading(false)
     } else {
       setIsEditActive(true)
     }
@@ -63,9 +66,9 @@ export const TextUpdaterEdge = ({
     <>
       <BaseEdge id={id} markerEnd={markerEnd} path={edgePath} />
       <EdgeLabelRenderer>
-        <EdgeContainer onClick={() => !isEditActive && handleEdgeClick()} colors={calculateColor(grade.efactor)} labelX={labelX} labelY={labelY}>
+        <EdgeContainer colors={calculateColor(grade.efactor)} labelX={labelX} labelY={labelY}>
           {isEditActive ?
-            <form>
+            <Form>
               <label htmlFor="connection">Connection:
                 <Textarea
                   id="connection" 
@@ -76,9 +79,12 @@ export const TextUpdaterEdge = ({
                 />
               </label>
               <Button type="button" onClick={() => setIsEditActive(false)}>Save</Button>
-            </form>
+            </Form>
             :
-            <span>{getEdgeText(connection)}</span>
+            <DefaultContent onClick={handleEdgeClick}>
+             <span>{getEdgeText(connection)}</span> 
+             {showGrading && <LevelOfDifficulty id={id} type="edge" onClick={() => setShowGrading(false)} />}
+            </DefaultContent>
           }
         </EdgeContainer>
       </EdgeLabelRenderer>
