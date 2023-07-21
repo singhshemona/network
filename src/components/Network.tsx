@@ -73,7 +73,7 @@ export const Network = () => {
 
       addNewNode(position);
     },
-    [reactFlowInstance, addNewNode],
+    [reactFlowInstance, addNewNode]
   );
 
   return (
@@ -92,7 +92,7 @@ export const Network = () => {
       fitView
     >
       <Background variant={BackgroundVariant.Dots} />
-      {nodes.length > 10 && <MiniMap zoomable pannable />}
+      {nodes.length >= 10 && <MiniMap zoomable pannable />}
     </ReactFlow>
   );
 };

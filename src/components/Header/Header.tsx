@@ -84,7 +84,7 @@ export const Header = () => {
             <div>
               <label htmlFor="network name">Change Network Name</label>
               <Input
-                marginBottom="0"
+                $marginBottom="0"
                 value={networkName}
                 id="network name"
                 type="text"

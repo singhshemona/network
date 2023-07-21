@@ -6,7 +6,7 @@ type NodeAndEdgeContainerProps = {
 };
 
 type InputProps = {
-  marginBottom?: string;
+  $marginBottom?: string;
 };
 
 export const GlobalStyle = createGlobalStyle`
@@ -54,8 +54,8 @@ export const Input = styled.input<InputProps>`
   width: 100%;
   height: 30px;
   box-sizing: border-box;
-  margin-bottom: ${({ marginBottom }) =>
-    marginBottom ? marginBottom : "12px"};
+  margin-bottom: ${({ $marginBottom }) =>
+    $marginBottom ? $marginBottom : "12px"};
 `;
 
 export const Label = styled.label`
