@@ -15,7 +15,7 @@ export const EdgeContainer = styled(NodeAndEdgeContainer)<EdgeContainerProps>`
 `;
 
 export const Textarea = styled.textarea`
-  font-family: ${(props) => props.theme.fonts.default};
+  font-family: ${({ theme }) => theme.fonts.default};
   margin-bottom: 6px;
   padding: 6px;
   width: 100%;

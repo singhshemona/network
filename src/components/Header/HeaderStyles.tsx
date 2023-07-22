@@ -1,15 +1,15 @@
 import styled from "styled-components";
 
 export const HeaderContainer = styled.header`
-  background-color: ${(props) => props.theme.colors.cream};
-  color: ${(props) => props.theme.colors.lightGray};
+  background-color: ${({ theme }) => theme.colors.cream};
+  color: ${({ theme }) => theme.colors.lightGray};
   position: sticky;
   top: 0;
   z-index: 1;
 `;
 
 export const Menu = styled.menu`
-  border-bottom: 1px solid ${(props) => props.theme.colors.lightGray};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.lightGray};
   list-style-type: none;
   margin: 0;
   display: flex;
@@ -18,7 +18,7 @@ export const Menu = styled.menu`
 `;
 
 export const Title = styled.h1`
-  font-weight: ${(props) => props.theme.fontWeight.bold};
+  font-weight: ${({ theme }) => theme.fontWeight.bold};
   font-size: 20px;
   margin: 0;
 `;
@@ -29,7 +29,7 @@ export const NetworkName = styled.h2`
 `;
 
 export const HeaderSecondLayerContainer = styled.div`
-  border-bottom: 1px solid ${(props) => props.theme.colors.lightGray};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.lightGray};
   display: flex;
   gap: 30px;
   align-items: center;
@@ -37,7 +37,7 @@ export const HeaderSecondLayerContainer = styled.div`
 `;
 
 export const Link = styled.a`
-  color: ${(props) => props.theme.colors.lightGray};
+  color: ${({ theme }) => theme.colors.lightGray};
 `;
 
 export const NetworkNameEditContainer = styled.div`

@@ -25,6 +25,7 @@ export const Header = () => {
     setStudyMode: state.setStudyMode,
     networkName: state.networkName,
     setNetworkName: state.setNetworkName,
+    addNewNode: state.addNewNode,
   });
 
   const {
@@ -33,6 +34,7 @@ export const Header = () => {
     setStudyMode,
     networkName,
     setNetworkName,
+    addNewNode,
   } = useStore(selector, shallow);
 
   const createNewNetwork = () => {
@@ -57,6 +59,13 @@ export const Header = () => {
     if (!event.dataTransfer) return;
     event.dataTransfer.setData("application/reactflow", nodeType);
     event.dataTransfer.effectAllowed = "move";
+  };
+
+  const addNode = () => {
+    addNewNode({
+      x: 0,
+      y: 0,
+    });
   };
 
   return (
@@ -106,6 +115,7 @@ export const Header = () => {
             onDragStart(event, "default")
           }
           draggable
+          onClick={addNode} // for touch screens
         >
           Add Node
         </Button>

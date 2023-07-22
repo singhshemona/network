@@ -8,7 +8,7 @@ export const NodeContainer = styled(NodeAndEdgeContainer)`
 `;
 
 export const Prompt = styled.p`
-  font-weight: ${(props) => props.theme.fontWeight.bold};
+  font-weight: ${({ theme }) => theme.fontWeight.bold};
   margin: 0;
   font-size: 18px;
 `;

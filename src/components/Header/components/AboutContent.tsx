@@ -5,7 +5,7 @@ export const AboutContent = () => {
     <>
       <h3>What is this?</h3>
       <p>
-        An exploration into how we might learn more effectively, inspired by
+        An exploration into how we might learn more effectively, inspired by{" "}
         <a
           href="https://www.wgu.edu/blog/connectivism-learning-theory2105.html"
           target="_blank"
@@ -18,10 +18,14 @@ export const AboutContent = () => {
       <h3>How do you use it?</h3>
       <ol>
         <li>
-          Pick a topic you want to learn, maybe you already flashcards for it
-          (think: Anki).
+          Pick a topic you want to learn. Maybe you already have flashcards for
+          the topic on Anki, Quizlet, etc.
         </li>
-        <li>To add a new node drag the "Add Node" button onto the canvas.</li>
+        <li>
+          To add a new node, drag the "Add Node" button onto the canvas where
+          you would like the node to be, or just click to place one in the top left
+          corner.
+        </li>
         <li>
           For maximum learning efficiency, ensure your prompts and answers{" "}
           <a
@@ -35,7 +39,7 @@ export const AboutContent = () => {
         </li>
         <li>
           Connect nodes that you think relate in some way, then describe that
-          connection in their shared edge's text.
+          connection in their shared edge's text if you like.
         </li>
         <li>
           To study your cards, click the "On" button next to "Study mode". Try
