@@ -71,7 +71,7 @@ export const TextUpdaterNode = ({ data, id }: NodeProps) => {
   });
 
   return (
-    <NodeContainer $colors={calculateColor(grade.efactor)}>
+    <NodeContainer $colors={calculateColor(grade.interval, grade.efactor)}>
       <Handle type="target" position={Position.Top} id="a" />
       {isEditActive ? (
         <Form>

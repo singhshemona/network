@@ -72,7 +72,7 @@ export const TextUpdaterEdge = ({
       <BaseEdge id={id} markerEnd={markerEnd} path={edgePath} />
       <EdgeLabelRenderer>
         <EdgeContainer
-          $colors={calculateColor(grade.efactor)}
+          $colors={calculateColor(grade.interval, grade.efactor)}
           $labelX={labelX}
           $labelY={labelY}
         >
