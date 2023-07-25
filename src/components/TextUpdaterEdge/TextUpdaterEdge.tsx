@@ -87,7 +87,7 @@ export const TextUpdaterEdge = ({
                   onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) =>
                     onUpdateEdge(id, event.target.value)
                   }
-                  className="nodrag"
+                  className="nopan"
                 />
               </label>
               <Button type="button" onClick={() => setIsEditActive(false)}>
