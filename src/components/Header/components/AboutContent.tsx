@@ -24,9 +24,9 @@ export const AboutContent = () => {
         <li>
           To add a new node, drag the "Add Node" button onto the canvas where
           you would like the node to be, or just click to place one in the top
-          left corner. (If you click it you might have to drag the canvas a bit
-          to the top left to see where the node was placed, depending on your
-          screen size.)
+          left corner. (If you clicked, depending on your
+          screen size you might have to drag the canvas a bit
+          to the top left to see where the node was placed.)
         </li>
         <li>
           For maximum learning efficiency, ensure your prompts and answers{" "}

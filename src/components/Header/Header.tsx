@@ -63,8 +63,8 @@ export const Header = () => {
 
   const addNode = () => {
     addNewNode({
-      x: 0,
-      y: 0,
+      x: 20,
+      y: 20,
     });
   };
 
