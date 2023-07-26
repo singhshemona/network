@@ -100,6 +100,12 @@ export const AboutContent = () => {
           ready to return to your Network simply upload the files.
         </li>
       </ul>
+      <h3>Who made this?</h3>
+      <ul>
+        <li>Shemona Singh</li>
+        <li><a href="https://www.linkedin.com/in/shemonasingh/" target="_blank" rel="noreferrer">LinkedIn</a></li>
+        <li><a href="https://github.com/singhshemona" target="_blank" rel="noreferrer">Github</a></li>
+      </ul>
     </>
   );
 };
