@@ -6,7 +6,7 @@ An exploration into how we might learn more effectively, inspired by [connectivi
 
 ## To view:
 
-[See it in action](network-pi.vercel.app).
+[See it in action](https://network-pi.vercel.app/).
 
 ## To Contribute:
 
